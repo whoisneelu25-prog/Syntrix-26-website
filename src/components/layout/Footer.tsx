@@ -138,18 +138,6 @@ export const Footer: React.FC<FooterProps> = ({
 
         </div>
 
-        {/* POSTER CREWMATES BANNER STRIP */}
-        <div className="pt-6 border-t border-white/10 flex flex-col items-center justify-center">
-          <img
-            src="/assets/crewmates/syntrix_poster_crew.png"
-            alt="SYNTRIX'26 Poster Crewmates Team"
-            className="w-full max-w-xl h-auto object-contain opacity-85 hover:opacity-100 transition-opacity drop-shadow-[0_0_25px_rgba(0,240,255,0.3)]"
-          />
-          <span className="font-mono text-[10px] text-cyan-400/70 tracking-widest mt-2 uppercase">
-            SYNTRIX'26 CREW FLEET // PRATHYUSHA ENGINEERING COLLEGE
-          </span>
-        </div>
-
         {/* BOTTOM STRIP */}
         <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-400">
           <div>
