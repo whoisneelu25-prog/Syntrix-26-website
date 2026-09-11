@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { eventConfig } from '../../config/eventConfig';
 import { NeonButton } from '../ui/NeonButton';
-import { CrewCustomizer } from '../ui/CrewCustomizer';
 import { 
   Calendar, 
   Clock, 
   MapPin, 
   Compass, 
   Layers, 
-  Sparkles,
-  ShieldCheck,
-  UserCheck,
-  ShieldAlert,
-  QrCode
+  Sparkles, 
+  ShieldCheck, 
+  ShieldAlert, 
+  QrCode 
 } from 'lucide-react';
 import { soundEngine } from '../../lib/soundEffects';
 
@@ -28,8 +26,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenRegisterModal,
   onOpenEmergencyModal
 }) => {
-  const [showCustomizer, setShowCustomizer] = useState(false);
-
   return (
     <section
       id="hero"
@@ -200,61 +196,46 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             transition={{ duration: 0.9, delay: 0.2 }}
             className="lg:col-span-5 flex flex-col items-center justify-center relative"
           >
-            <AnimatePresence mode="wait">
-              {showCustomizer ? (
-                <CrewCustomizer onClose={() => setShowCustomizer(false)} />
-              ) : (
-                /* Crisp Holographic Pod Frame (Zero muddy filters) */
-                <div className="relative w-72 sm:w-80 h-80 sm:h-96 rounded-3xl bg-space-950/85 border border-cyan-500/40 backdrop-blur-xl p-6 flex flex-col items-center justify-between shadow-[0_0_40px_rgba(0,240,255,0.15)] hud-corner-all">
-                  
-                  {/* Telemetry Header */}
-                  <div className="w-full flex items-center justify-between border-b border-cyan-500/20 pb-2.5">
-                    <div className="font-chakra text-xs text-cyan-300 font-bold tracking-wider">
-                      DROPSHIP: PEC_LOBBY
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span className="font-mono text-[10px] text-emerald-400 font-bold">ONLINE</span>
-                    </div>
-                  </div>
-
-                  {/* Clean, Crisp High-Res Among Us Crewmate Image */}
-                  <div className="relative py-2 flex flex-col items-center justify-center group cursor-pointer"
-                    onClick={() => {
-                      soundEngine.playBlip(750);
-                      setShowCustomizer(true);
-                    }}
-                    title="Click to customize crew & hats"
-                  >
-                    <motion.div
-                      animate={{ y: [-5, 5, -5] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                      className="w-36 h-48 flex items-center justify-center"
-                    >
-                      <img
-                        src="/assets/cinematic/cyan_walking.png"
-                        alt="Among Us Cyan Crewmate"
-                        className="w-full h-full object-contain"
-                      />
-                    </motion.div>
-                    {/* Floor Shadow */}
-                    <div className="w-24 h-3 bg-black/70 rounded-full blur-[2px] -mt-3" />
-                  </div>
-
-                  {/* Customizer Toggle Button */}
-                  <button
-                    onClick={() => {
-                      soundEngine.playBlip(800);
-                      setShowCustomizer(true);
-                    }}
-                    className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-cyan-950/80 border border-cyan-500/40 hover:border-cyan-300 text-cyan-300 font-chakra text-xs font-bold tracking-wider uppercase transition-all shadow-[0_0_12px_rgba(0,240,255,0.2)] group"
-                  >
-                    <UserCheck className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span>CUSTOMIZE CREW &amp; HATS</span>
-                  </button>
+            {/* Crisp Holographic Pod Frame (Zero muddy filters) */}
+            <div className="relative w-72 sm:w-80 h-80 sm:h-96 rounded-3xl bg-space-950/85 border border-cyan-500/40 backdrop-blur-xl p-6 flex flex-col items-center justify-between shadow-[0_0_40px_rgba(0,240,255,0.15)] hud-corner-all">
+              
+              {/* Telemetry Header */}
+              <div className="w-full flex items-center justify-between border-b border-cyan-500/20 pb-2.5">
+                <div className="font-chakra text-xs text-cyan-300 font-bold tracking-wider">
+                  DROPSHIP: PEC_LOBBY
                 </div>
-              )}
-            </AnimatePresence>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span className="font-mono text-[10px] text-emerald-400 font-bold">ONLINE</span>
+                </div>
+              </div>
+
+              {/* Clean, Crisp High-Res Among Us Crewmate Image */}
+              <div className="relative py-2 flex flex-col items-center justify-center">
+                <motion.div
+                  animate={{ y: [-5, 5, -5] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  className="w-36 h-48 flex items-center justify-center"
+                >
+                  <img
+                    src="/assets/cinematic/cyan_walking.png"
+                    alt="Among Us Cyan Crewmate"
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
+                {/* Floor Shadow */}
+                <div className="w-24 h-3 bg-black/70 rounded-full blur-[2px] -mt-3" />
+              </div>
+
+              {/* Dropship Telemetry Status Badge */}
+              <div className="w-full py-2.5 px-3.5 rounded-xl bg-space-900/90 border border-cyan-500/30 flex items-center justify-between text-cyan-300 font-chakra text-xs font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(0,240,255,0.1)]">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <span>OFFICIAL CREW</span>
+                </div>
+                <span className="font-mono text-[11px] text-cyan-400/80">SEMINAR HALL · PEC</span>
+              </div>
+            </div>
 
             {/* Mini Floating Satellite Tag */}
             <motion.div

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { soundEngine } from '../../lib/soundEffects';
-import { FastForward, AlertTriangle, ShieldCheck, Cpu, Volume2 } from 'lucide-react';
+import { FastForward, AlertTriangle, ShieldCheck, Cpu, Volume2, VolumeX } from 'lucide-react';
 
 interface IntroSequenceProps {
   onComplete: () => void;
@@ -20,6 +20,13 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
   const [isCameraShaking, setIsCameraShaking] = useState<boolean>(false);
   const [threatText, setThreatText] = useState<string>('');
   const [isSkipping, setIsSkipping] = useState<boolean>(false);
+  const [audioEnabled, setAudioEnabled] = useState<boolean>(() => soundEngine.getIsAudioEnabled());
+
+  const handleToggleAudio = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newState = soundEngine.toggleMute();
+    setAudioEnabled(newState);
+  };
 
   useEffect(() => {
     // 1. Check prefers-reduced-motion
@@ -109,14 +116,8 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
     }, 200);
   };
 
-  const handleInteractionUnmute = () => {
-    soundEngine.initContext();
-    soundEngine.setUnmuted();
-  };
-
   return (
     <motion.div
-      onClick={handleInteractionUnmute}
       initial={{ opacity: 1 }}
       animate={{
         opacity: isSkipping ? 0 : 1,
@@ -125,14 +126,40 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
       }}
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: isCameraShaking ? 0.35 : 0.4 }}
+      onClick={() => {
+        soundEngine.initContext();
+        if (soundEngine.getIsAudioEnabled()) {
+          soundEngine.startAmbient();
+        }
+      }}
+      onPointerDown={() => {
+        soundEngine.initContext();
+        if (soundEngine.getIsAudioEnabled()) {
+          soundEngine.startAmbient();
+        }
+      }}
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-space-950 select-none cursor-pointer"
     >
       {/* TOP CONTROLS */}
       <div className="absolute top-6 left-6 right-6 z-50 flex items-center justify-between pointer-events-auto">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-500/40 bg-space-950/80 backdrop-blur-md text-xs font-mono text-cyan-300 shadow-[0_0_12px_rgba(0,240,255,0.2)]">
-          <Volume2 className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-          <span className="tracking-widest">AUDIO ACTIVE</span>
-        </div>
+        <button
+          onClick={handleToggleAudio}
+          className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/40 bg-space-950/80 backdrop-blur-md text-xs font-mono text-cyan-300 hover:text-white hover:border-cyan-300 transition-all shadow-[0_0_12px_rgba(0,240,255,0.2)] cursor-pointer group"
+          title={audioEnabled ? "Mute audio" : "Turn audio on"}
+          aria-label="Toggle Audio"
+        >
+          {audioEnabled ? (
+            <>
+              <Volume2 className="w-3.5 h-3.5 text-cyan-400 animate-pulse group-hover:scale-110 transition-transform" />
+              <span className="tracking-widest font-bold">AUDIO ON</span>
+            </>
+          ) : (
+            <>
+              <VolumeX className="w-3.5 h-3.5 text-slate-400 group-hover:scale-110 transition-transform" />
+              <span className="tracking-widest text-slate-400 font-bold">AUDIO OFF</span>
+            </>
+          )}
+        </button>
 
         <button
           onClick={(e) => {

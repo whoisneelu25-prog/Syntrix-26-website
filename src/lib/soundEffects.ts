@@ -14,16 +14,33 @@ class SoundEngine {
       // If user specifically saved 'false', respect it. Otherwise default to enabled (true)
       this.isMuted = saved === 'false';
 
-      // Auto-unlock AudioContext on first user interaction (click, key, touch)
+      // Auto-unlock AudioContext on first user interaction (gesture, pointer, touch, scroll)
       const unlockAudio = () => {
         this.initContext();
+        if (!this.isMuted) {
+          this.startAmbient();
+        }
         window.removeEventListener('click', unlockAudio);
         window.removeEventListener('keydown', unlockAudio);
         window.removeEventListener('touchstart', unlockAudio);
+        window.removeEventListener('pointerdown', unlockAudio);
+        window.removeEventListener('pointermove', unlockAudio);
+        window.removeEventListener('scroll', unlockAudio);
+        window.removeEventListener('wheel', unlockAudio);
       };
       window.addEventListener('click', unlockAudio, { once: true, passive: true });
       window.addEventListener('keydown', unlockAudio, { once: true, passive: true });
       window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+      window.addEventListener('pointerdown', unlockAudio, { once: true, passive: true });
+      window.addEventListener('pointermove', unlockAudio, { once: true, passive: true });
+      window.addEventListener('scroll', unlockAudio, { once: true, passive: true });
+      window.addEventListener('wheel', unlockAudio, { once: true, passive: true });
+
+      // Eagerly try to start context and ambient on load
+      this.initContext();
+      if (!this.isMuted) {
+        this.startAmbient();
+      }
     }
   }
 
