@@ -10,8 +10,7 @@ import {
   Layers, 
   Sparkles, 
   ShieldCheck, 
-  ShieldAlert, 
-  QrCode 
+  ShieldAlert 
 } from 'lucide-react';
 import { soundEngine } from '../../lib/soundEffects';
 
@@ -150,15 +149,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               >
                 REGISTER NOW
               </button>
-
-              <a
-                href="#qr-scanner"
-                onClick={() => soundEngine.playBlip(750)}
-                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl border border-cyan-500/40 bg-cyan-950/40 text-cyan-300 hover:text-white hover:border-cyan-300 font-chakra text-xs font-bold tracking-wider transition-all"
-              >
-                <QrCode className="w-4 h-4" />
-                <span>SCAN QR PASS</span>
-              </a>
 
               {onOpenPosterModal && (
                 <button

@@ -34,7 +34,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenRegisterModal, onReplayInt
     { label: 'MISSION', href: '#briefing' },
     { label: 'EVENTS', href: '#events' },
     { label: 'RULES', href: '#rulebook' },
-    { label: 'QR PASS', href: '#qr-scanner' },
     { label: 'REGISTER', href: '#register' },
     { label: 'CONTACT', href: '#contact' },
   ];

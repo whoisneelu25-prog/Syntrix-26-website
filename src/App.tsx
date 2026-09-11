@@ -19,7 +19,6 @@ import { EventGrid } from './components/sections/EventGrid';
 import { EventDetailModal } from './components/sections/EventDetailModal';
 import { RulesSection } from './components/sections/RulesSection';
 import { CountdownSection } from './components/sections/CountdownSection';
-import { QRScannerSection } from './components/sections/QRScannerSection';
 import { PrizeSection } from './components/sections/PrizeSection';
 import { RegistrationSection } from './components/sections/RegistrationSection';
 import { ContactSection } from './components/sections/ContactSection';
@@ -128,11 +127,6 @@ export function App() {
 
         {/* MISSION REWARDS (AUTO-HIDES IF EMPTY) */}
         <PrizeSection />
-
-        {/* SCANNER STATION // OFFICIAL QR PASS & REAL-TIME SCANNER */}
-        <QRScannerSection
-          onOpenNoticeModal={() => handleOpenRegisterNotice()}
-        />
 
         {/* JOIN THE CREW // 4-STEP AMONG US TASK */}
         <RegistrationSection
