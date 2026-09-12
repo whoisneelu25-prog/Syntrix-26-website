@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { eventConfig, type EventItem } from './config/eventConfig';
 import { soundEngine } from './lib/soundEffects';
@@ -28,7 +28,6 @@ import { Footer } from './components/layout/Footer';
 import { RegistrationNoticeModal } from './components/sections/RegistrationNoticeModal';
 import { PosterModal } from './components/sections/PosterModal';
 import { EmergencyMeetingModal } from './components/ui/EmergencyMeetingModal';
-import { MissionProgressHUD } from './components/ui/MissionProgressHUD';
 import { CrewCustomizer } from './components/ui/CrewCustomizer';
 
 export function App() {
@@ -58,42 +57,13 @@ export function App() {
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState<boolean>(false);
   const [isCrewCustomizerOpen, setIsCrewCustomizerOpen] = useState<boolean>(false);
 
-  // HUD Mission Task Tracker States
-  const [hasViewedMissions, setHasViewedMissions] = useState<boolean>(false);
-  const [hasReadRules, setHasReadRules] = useState<boolean>(false);
-  const [hasClickedRegister, setHasClickedRegister] = useState<boolean>(false);
-
-  // Scroll observer to update task completions automatically
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight * 0.6;
-      
-      const eventsEl = document.getElementById('events');
-      if (eventsEl && scrollPos >= eventsEl.offsetTop) {
-        setHasViewedMissions(true);
-      }
-
-      const rulesEl = document.getElementById('rules');
-      if (rulesEl && scrollPos >= rulesEl.offsetTop) {
-        setHasReadRules(true);
-      }
-
-      const registerEl = document.getElementById('register');
-      if (registerEl && scrollPos >= registerEl.offsetTop + 100) {
-        // user scrolled deep into registration terminal
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const handleIntroComplete = () => {
     soundEngine.stopAmbient();
     setShowIntro(false);
   };
 
   const handleReplayIntro = () => {
+    soundEngine.setUnmuted();
     soundEngine.playWhoosh();
     setShowIntro(true);
   };
@@ -101,11 +71,9 @@ export function App() {
   const handleOpenRegisterNotice = (eventName?: string) => {
     setNoticeEventName(eventName);
     setIsNoticeModalOpen(true);
-    setHasClickedRegister(true);
   };
 
   const handleCardRegisterClick = (event: EventItem) => {
-    setHasClickedRegister(true);
     const targetUrl = event.registrationLink || eventConfig.registrationLink;
     if (!targetUrl || targetUrl.includes('YOUR_GOOGLE_FORM')) {
       handleOpenRegisterNotice(event.name);
@@ -115,7 +83,6 @@ export function App() {
   };
 
   const handleViewEventDetails = (event: EventItem) => {
-    setHasViewedMissions(true);
     setSelectedEventModal(event);
   };
 
@@ -182,12 +149,6 @@ export function App() {
         <ContactSection />
       </main>
 
-      {/* 7. MISSION PROGRESS HUD (AMONG US STYLE TASK BAR) */}
-      <MissionProgressHUD
-        hasViewedMissions={hasViewedMissions}
-        hasReadRules={hasReadRules}
-        hasClickedRegister={hasClickedRegister}
-      />
 
       {/* 8. FLOATING CREW SELECT BUTTON (BOTTOM RIGHT) */}
       <div className="fixed bottom-4 right-4 z-30">
