@@ -76,6 +76,11 @@ class SoundEngine {
     return !this.isMuted;
   }
 
+  public isAudioSuspended(): boolean {
+    if (typeof window === 'undefined') return true;
+    return !this.ctx || this.ctx.state === 'suspended';
+  }
+
   public startAmbient() {
     // Disabled: Continuous background drone/hum sound completely removed as requested
     this.stopAmbient();
@@ -132,7 +137,7 @@ class SoundEngine {
     }
   }
 
-  // Sci-fi crewmate footstep
+  // Sci-fi crewmate footstep (Rubber space suit squeak & floor thud)
   public playFootstep() {
     if (this.isMuted) return;
     this.initContext();
@@ -145,21 +150,21 @@ class SoundEngine {
       const filter = this.ctx.createBiquadFilter();
 
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(140 + Math.random() * 30, now);
-      osc.frequency.exponentialRampToValueAtTime(60, now + 0.06);
+      osc.frequency.setValueAtTime(160 + Math.random() * 30, now);
+      osc.frequency.exponentialRampToValueAtTime(70, now + 0.08);
 
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(280, now);
+      filter.frequency.setValueAtTime(320, now);
 
-      gain.gain.setValueAtTime(0.02, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+      gain.gain.setValueAtTime(0.07, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
 
       osc.connect(filter);
       filter.connect(gain);
       gain.connect(this.ctx.destination);
 
       osc.start(now);
-      osc.stop(now + 0.06);
+      osc.stop(now + 0.08);
     } catch {
       // ignore
     }
@@ -181,7 +186,7 @@ class SoundEngine {
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(freq, now + i * 0.12);
 
-        gain.gain.setValueAtTime(0.05, now + i * 0.12);
+        gain.gain.setValueAtTime(0.08, now + i * 0.12);
         gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.12 + 0.1);
 
         osc.connect(gain);
@@ -218,7 +223,7 @@ class SoundEngine {
       sliceFilter.frequency.exponentialRampToValueAtTime(400, now + 0.18);
       sliceFilter.Q.setValueAtTime(4, now);
 
-      sliceGain.gain.setValueAtTime(0.08, now);
+      sliceGain.gain.setValueAtTime(0.12, now);
       sliceGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
 
       sliceOsc.connect(sliceFilter);
@@ -232,16 +237,16 @@ class SoundEngine {
       const thudGain = this.ctx.createGain();
 
       thudOsc.type = 'triangle';
-      thudOsc.frequency.setValueAtTime(180, now + 0.04);
-      thudOsc.frequency.exponentialRampToValueAtTime(36, now + 0.3);
+      thudOsc.frequency.setValueAtTime(190, now + 0.03);
+      thudOsc.frequency.exponentialRampToValueAtTime(36, now + 0.32);
 
-      thudGain.gain.setValueAtTime(0.12, now + 0.04);
-      thudGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.32);
+      thudGain.gain.setValueAtTime(0.16, now + 0.03);
+      thudGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.34);
 
       thudOsc.connect(thudGain);
       thudGain.connect(this.ctx.destination);
-      thudOsc.start(now + 0.04);
-      thudOsc.stop(now + 0.33);
+      thudOsc.start(now + 0.03);
+      thudOsc.stop(now + 0.35);
 
       // Layer 3: Noise squish / impact crunch burst
       const bufferSize = this.ctx.sampleRate * 0.12; // 120ms of noise
@@ -255,11 +260,11 @@ class SoundEngine {
 
       const noiseFilter = this.ctx.createBiquadFilter();
       noiseFilter.type = 'lowpass';
-      noiseFilter.frequency.setValueAtTime(700, now);
+      noiseFilter.frequency.setValueAtTime(750, now);
       noiseFilter.frequency.linearRampToValueAtTime(180, now + 0.12);
 
       const noiseGain = this.ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.09, now);
+      noiseGain.gain.setValueAtTime(0.13, now);
       noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
 
       noiseNode.connect(noiseFilter);
@@ -272,11 +277,11 @@ class SoundEngine {
       const subOsc = this.ctx.createOscillator();
       const subGain = this.ctx.createGain();
       subOsc.type = 'sine';
-      subOsc.frequency.setValueAtTime(95, now + 0.02);
-      subOsc.frequency.exponentialRampToValueAtTime(24, now + 0.38);
+      subOsc.frequency.setValueAtTime(100, now + 0.02);
+      subOsc.frequency.exponentialRampToValueAtTime(24, now + 0.4);
 
-      subGain.gain.setValueAtTime(0.1, now + 0.02);
-      subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+      subGain.gain.setValueAtTime(0.15, now + 0.02);
+      subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.42);
 
       subOsc.connect(subGain);
       subGain.connect(this.ctx.destination);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { soundEngine } from '../../lib/soundEffects';
-import { FastForward, AlertTriangle, ShieldCheck, Cpu } from 'lucide-react';
+import { FastForward, AlertTriangle, ShieldCheck, Cpu, Volume2 } from 'lucide-react';
 
 interface IntroSequenceProps {
   onComplete: () => void;
@@ -20,6 +20,30 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
   const [isCameraShaking, setIsCameraShaking] = useState<boolean>(false);
   const [threatText, setThreatText] = useState<string>('');
   const [isSkipping, setIsSkipping] = useState<boolean>(false);
+  const [audioPromptVisible, setAudioPromptVisible] = useState<boolean>(() => {
+    return soundEngine.isAudioSuspended();
+  });
+
+  // Unlock AudioContext on any user gesture
+  useEffect(() => {
+    const handleUserGesture = () => {
+      soundEngine.setUnmuted();
+      soundEngine.initContext();
+      setAudioPromptVisible(soundEngine.isAudioSuspended());
+    };
+
+    window.addEventListener('click', handleUserGesture, { passive: true });
+    window.addEventListener('keydown', handleUserGesture, { passive: true });
+    window.addEventListener('touchstart', handleUserGesture, { passive: true });
+    window.addEventListener('pointerdown', handleUserGesture, { passive: true });
+
+    return () => {
+      window.removeEventListener('click', handleUserGesture);
+      window.removeEventListener('keydown', handleUserGesture);
+      window.removeEventListener('touchstart', handleUserGesture);
+      window.removeEventListener('pointerdown', handleUserGesture);
+    };
+  }, []);
 
   useEffect(() => {
     // 1. Check prefers-reduced-motion
@@ -29,9 +53,10 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
         onComplete();
         return;
       }
-      // Force sound always active and ensure audio context is ready for intro scene
+      // Force sound active and ensure audio context is initiated
       soundEngine.setUnmuted();
       soundEngine.initContext();
+      setAudioPromptVisible(soundEngine.isAudioSuspended());
     }
 
     // Footsteps as crewmate enters
@@ -110,6 +135,14 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
     }, 200);
   };
 
+  const handleActivateAudio = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    soundEngine.setUnmuted();
+    soundEngine.initContext();
+    setAudioPromptVisible(false);
+    soundEngine.playConfirm();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 1 }}
@@ -122,23 +155,39 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
       transition={{ duration: isCameraShaking ? 0.35 : 0.4 }}
       onClick={() => {
         soundEngine.initContext();
+        setAudioPromptVisible(false);
       }}
       onPointerDown={() => {
         soundEngine.initContext();
-      }}
-      onPointerMove={() => {
-        soundEngine.initContext();
+        setAudioPromptVisible(false);
       }}
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-space-950 select-none cursor-pointer"
     >
-      {/* TOP CONTROLS */}
-      <div className="absolute top-6 left-6 right-6 z-50 flex items-center justify-end pointer-events-auto">
+      {/* TOP CONTROLS BAR */}
+      <div className="absolute top-6 left-6 right-6 z-50 flex items-center justify-between pointer-events-auto">
+        {/* AUDIO ACTIVATION BUTTON / STATUS INDICATOR */}
+        {audioPromptVisible ? (
+          <button
+            onClick={handleActivateAudio}
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-400/50 bg-amber-950/85 backdrop-blur-md text-xs font-mono text-amber-300 shadow-[0_0_15px_rgba(251,191,36,0.35)] animate-pulse hover:bg-amber-900/90 transition-all cursor-pointer"
+            aria-label="Enable cinematic sound"
+          >
+            <Volume2 className="w-4 h-4 text-amber-300" />
+            <span>ENABLE INTRO AUDIO 🔊</span>
+          </button>
+        ) : (
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-space-950/85 border border-cyan-500/30 font-mono text-[10px] text-cyan-300 backdrop-blur-md shadow-md">
+            <Volume2 className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+            <span>CINEMATIC AUDIO ON</span>
+          </div>
+        )}
+
         <button
           onClick={(e) => {
             e.stopPropagation();
             handleSkip();
           }}
-          className="flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/40 bg-space-950/85 backdrop-blur-md text-xs font-mono tracking-widest text-cyan-300 hover:text-white hover:border-cyan-400 hover:bg-cyan-950/70 transition-all shadow-[0_0_15px_rgba(0,240,255,0.25)] group"
+          className="flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/40 bg-space-950/85 backdrop-blur-md text-xs font-mono tracking-widest text-cyan-300 hover:text-white hover:border-cyan-400 hover:bg-cyan-950/70 transition-all shadow-[0_0_15px_rgba(0,240,255,0.25)] group cursor-pointer"
           aria-label="Skip cinematic introduction"
         >
           <span>SKIP INTRO</span>
