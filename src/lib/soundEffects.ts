@@ -17,9 +17,6 @@ class SoundEngine {
       // Auto-unlock AudioContext on first user interaction (gesture, pointer, touch, scroll)
       const unlockAudio = () => {
         this.initContext();
-        if (!this.isMuted) {
-          this.startAmbient();
-        }
         window.removeEventListener('click', unlockAudio);
         window.removeEventListener('keydown', unlockAudio);
         window.removeEventListener('touchstart', unlockAudio);
@@ -36,11 +33,8 @@ class SoundEngine {
       window.addEventListener('scroll', unlockAudio, { once: true, passive: true });
       window.addEventListener('wheel', unlockAudio, { once: true, passive: true });
 
-      // Eagerly try to start context and ambient on load
+      // Eagerly try to start context on load
       this.initContext();
-      if (!this.isMuted) {
-        this.startAmbient();
-      }
     }
   }
 
@@ -64,7 +58,6 @@ class SoundEngine {
     if (!this.isMuted) {
       this.initContext();
       this.playConfirm();
-      this.startAmbient();
     } else {
       this.stopAmbient();
     }
@@ -84,71 +77,30 @@ class SoundEngine {
   }
 
   public startAmbient() {
-    if (this.isMuted) return;
-    this.initContext();
-    if (!this.ctx) return;
-
+    // Disabled: Continuous background drone/hum sound completely removed as requested
     this.stopAmbient();
-
-    try {
-      const now = this.ctx.currentTime;
-      
-      // Main deep spaceship hum (55Hz)
-      const osc = this.ctx.createOscillator();
-      const filter = this.ctx.createBiquadFilter();
-      const gain = this.ctx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(55, now);
-
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(140, now);
-
-      gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.025, now + 2.5);
-
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      this.ambientOsc = osc;
-      this.ambientGain = gain;
-
-      // Sub-harmonic drone for spaceship engines (36.7Hz)
-      const subOsc = this.ctx.createOscillator();
-      const subGain = this.ctx.createGain();
-      subOsc.type = 'triangle';
-      subOsc.frequency.setValueAtTime(36.7, now);
-      subGain.gain.setValueAtTime(0.001, now);
-      subGain.gain.linearRampToValueAtTime(0.015, now + 3);
-      subOsc.connect(subGain);
-      subGain.connect(this.ctx.destination);
-      subOsc.start();
-      this.ambientSubOsc = subOsc;
-    } catch {
-      // Audio not permitted or errored
-    }
   }
 
   public stopAmbient() {
-    if (this.ambientGain && this.ctx) {
-      try {
-        const now = this.ctx.currentTime;
-        this.ambientGain.gain.linearRampToValueAtTime(0.0001, now + 0.4);
-        setTimeout(() => {
-          if (this.ambientOsc) {
-            this.ambientOsc.stop();
-            this.ambientOsc = null;
-          }
-          if (this.ambientSubOsc) {
-            this.ambientSubOsc.stop();
-            this.ambientSubOsc = null;
-          }
-        }, 400);
-      } catch {
+    try {
+      if (this.ambientOsc) {
+        this.ambientOsc.stop();
+        this.ambientOsc.disconnect();
         this.ambientOsc = null;
+      }
+      if (this.ambientSubOsc) {
+        this.ambientSubOsc.stop();
+        this.ambientSubOsc.disconnect();
         this.ambientSubOsc = null;
       }
+      if (this.ambientGain) {
+        this.ambientGain.disconnect();
+        this.ambientGain = null;
+      }
+    } catch {
+      this.ambientOsc = null;
+      this.ambientSubOsc = null;
+      this.ambientGain = null;
     }
   }
 

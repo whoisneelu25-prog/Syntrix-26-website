@@ -47,6 +47,22 @@ export const EventGrid: React.FC<EventGridProps> = ({
             Select an operational track. Review the briefing intel, assemble your crewmates, and prepare for deployment.
           </p>
 
+          {/* CREWMATE PATROLLING NEAR TASK BOARD */}
+          <div className="flex items-center justify-center gap-2 pt-1">
+            <motion.div
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-400/30 text-cyan-300 font-mono text-[11px]"
+            >
+              <img
+                src="/assets/theme_crewmates/crewmate_3.png"
+                alt="Patrol Crewmate"
+                className="w-5 h-5 object-contain"
+              />
+              <span>CREWMATE ON PATROL // ALL MISSIONS READY FOR REGISTRATION</span>
+            </motion.div>
+          </div>
+
           {/* CATEGORY FILTER TABS */}
           <div className="inline-flex p-1 rounded-xl bg-space-900/90 border border-white/10 backdrop-blur-md">
             <button

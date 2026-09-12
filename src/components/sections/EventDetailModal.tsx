@@ -9,8 +9,6 @@ import {
   Clock, 
   MapPin, 
   Award, 
-  CheckCircle2, 
-  AlertTriangle, 
   ExternalLink,
   BookOpen,
   Info
@@ -130,38 +128,91 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
 
             {/* TELEMETRY SPECS GRID */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
-              <div className="p-3 rounded-xl bg-space-900/70 border border-white/10">
+              <div className="p-3 rounded-xl bg-space-900/80 border border-cyan-500/30">
                 <div className="flex items-center gap-1.5 text-cyan-400 mb-1">
                   <Users className="w-3.5 h-3.5" />
-                  <span className="text-[10px] text-slate-400 uppercase">TEAM SIZE</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-semibold">TEAM SIZE</span>
                 </div>
-                <span className="font-bold text-white">{event.teamSize}</span>
+                <span className="font-bold text-white text-sm">{event.teamSize}</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-space-900/70 border border-white/10">
+              <div className="p-3 rounded-xl bg-space-900/80 border border-purple-500/30">
                 <div className="flex items-center gap-1.5 text-purple-400 mb-1">
                   <Clock className="w-3.5 h-3.5" />
-                  <span className="text-[10px] text-slate-400 uppercase">DURATION</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-semibold">TIME</span>
                 </div>
-                <span className="font-bold text-white">{event.duration}</span>
+                <span className="font-bold text-white text-sm">{event.duration}</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-space-900/70 border border-white/10">
+              <div className="p-3 rounded-xl bg-space-900/80 border border-emerald-500/30">
                 <div className="flex items-center gap-1.5 text-emerald-400 mb-1">
                   <Award className="w-3.5 h-3.5" />
-                  <span className="text-[10px] text-slate-400 uppercase">ELIGIBILITY</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-semibold">ROUND</span>
                 </div>
-                <span className="font-bold text-white truncate block">{event.eligibility}</span>
+                <span className="font-bold text-white text-sm">{event.round || 'Single Round'}</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-space-900/70 border border-white/10">
-                <div className="flex items-center gap-1.5 text-rose-400 mb-1">
+              <div className="p-3 rounded-xl bg-space-900/80 border border-pink-500/30">
+                <div className="flex items-center gap-1.5 text-pink-400 mb-1">
                   <MapPin className="w-3.5 h-3.5" />
-                  <span className="text-[10px] text-slate-400 uppercase">VENUE</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-semibold">VENUE</span>
                 </div>
-                <span className="font-bold text-white truncate block">{event.venue || 'Seminar Hall'}</span>
+                <span className="font-bold text-white text-sm">{event.venue || 'AI&DS Block'}</span>
               </div>
             </div>
+
+            {/* TOPIC SPECIFICATION (IF APPLICABLE, E.G. PAPER 404 OR CRAZY STARTUP) */}
+            {event.topic && (
+              <div className="p-4 rounded-xl bg-gradient-to-r from-space-900 via-cyan-950/40 to-space-900 border border-cyan-500/40 space-y-1">
+                <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest font-bold block">
+                  MISSION TOPIC DIRECTIVE
+                </span>
+                <p className="font-orbitron text-sm sm:text-base font-extrabold text-white tracking-wide">
+                  {event.topic}
+                </p>
+              </div>
+            )}
+
+            {/* CRAZY STARTUP SPECIAL CONCEPT & ROTATING CARDS */}
+            {event.id === 'crazy-startup' && (
+              <div className="space-y-4 p-5 rounded-2xl bg-gradient-to-br from-pink-950/30 via-space-900/80 to-purple-950/30 border border-pink-500/40">
+                <div className="space-y-1">
+                  <span className="font-mono text-[10px] text-pink-400 uppercase tracking-widest font-bold block">
+                    MISSION CONCEPT
+                  </span>
+                  <p className="font-space text-sm text-slate-200 leading-relaxed font-semibold">
+                    {event.concept}
+                  </p>
+                </div>
+
+                {/* ANIMATED TAGLINE */}
+                <div className="py-2 px-4 rounded-xl bg-pink-950/60 border border-pink-400/50 text-center shadow-[0_0_20px_rgba(236,72,153,0.25)]">
+                  <span className="font-orbitron font-black text-xs sm:text-sm text-pink-200 tracking-widest uppercase animate-pulse">
+                    &ldquo;{event.animatedTagline || 'MAKE THE IMPOSSIBLE SOUND INVESTABLE.'}&rdquo;
+                  </span>
+                </div>
+
+                {/* ROTATING / SCROLLING EXAMPLE PROMPTS */}
+                {event.examplePrompts && (
+                  <div className="space-y-2 pt-1">
+                    <span className="font-mono text-[11px] text-cyan-300 font-bold uppercase tracking-wider block">
+                      EXAMPLE RANDOM TOPIC CARDS:
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {event.examplePrompts.map((prompt, idx) => (
+                        <div
+                          key={idx}
+                          className="p-3 rounded-xl bg-space-950/80 border border-cyan-500/25 hover:border-pink-400/60 transition-all font-mono text-xs text-slate-200 flex items-start gap-2 shadow-sm"
+                        >
+                          <span className="text-pink-400 font-bold">#{idx + 1}</span>
+                          <span>&ldquo;{prompt}&rdquo;</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* ABOUT THE MISSION */}
             <div className="space-y-2">
@@ -169,52 +220,35 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
                 <Info className="w-4 h-4" />
                 <span>ABOUT THIS MISSION</span>
               </h4>
-              <p className="font-space text-sm sm:text-base text-slate-300 leading-relaxed bg-space-900/40 p-4 rounded-xl border border-white/5">
+              <p className="font-space text-sm sm:text-base text-slate-300 leading-relaxed bg-space-900/50 p-4 rounded-xl border border-white/10">
                 {event.fullDescription}
               </p>
             </div>
 
-            {/* MISSION RULES SECTION */}
-            <div className="space-y-2">
-              <h4 className="flex items-center gap-2 font-orbitron text-xs sm:text-sm font-bold tracking-wider text-purple-300 uppercase">
-                <BookOpen className="w-4 h-4" />
-                <span>CREWMATE RULES &amp; DIRECTIVES</span>
-              </h4>
-
-              {event.rules && event.rules.length > 0 ? (
-                <ul className="space-y-2 font-mono text-xs sm:text-sm text-slate-300">
-                  {event.rules.map((rule, index) => (
-                    <li key={index} className="flex items-start gap-2.5 p-2.5 rounded-lg bg-space-900/50 border border-white/5">
-                      <span className="font-bold text-cyan-400 shrink-0">[{index + 1}]</span>
-                      <span>{rule}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <div className="p-4 rounded-xl bg-purple-950/20 border border-purple-500/20 text-purple-200 font-mono text-xs flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-purple-400 shrink-0" />
-                  <span>Rules will be revealed soon... Stand by for mission telemetry transmission.</span>
-                </div>
-              )}
-            </div>
-
-            {/* IMPORTANT INSTRUCTIONS */}
-            {event.importantInstructions && event.importantInstructions.length > 0 && (
-              <div className="space-y-2">
-                <h4 className="font-orbitron text-xs sm:text-sm font-bold tracking-wider text-amber-300 uppercase flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4" />
-                  <span>IMPORTANT INSTRUCTIONS</span>
+            {/* MISSION RULES SECTION (MANDATORY VERBATIM RULES) */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="flex items-center gap-2 font-orbitron text-xs sm:text-sm font-bold tracking-wider text-purple-300 uppercase">
+                  <BookOpen className="w-4 h-4 text-purple-400" />
+                  <span>OFFICIAL EVENT RULES &amp; DIRECTIVES</span>
                 </h4>
-                <div className="space-y-1.5 font-mono text-xs text-slate-300">
-                  {event.importantInstructions.map((instruction, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
-                      <span>{instruction}</span>
-                    </div>
-                  ))}
-                </div>
+                <span className="font-mono text-[10px] text-cyan-400">
+                  {event.rules.length} RULES ENFORCED
+                </span>
               </div>
-            )}
+
+              <ul className="space-y-2 font-mono text-xs sm:text-sm text-slate-200">
+                {event.rules.map((rule, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start gap-3 p-3 rounded-xl bg-space-900/70 border border-cyan-500/20 hover:border-cyan-400/40 transition-colors"
+                  >
+                    <span className="font-bold text-cyan-400 shrink-0 select-none">•</span>
+                    <span className="leading-relaxed">{rule}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* MODAL FOOTER */}

@@ -18,12 +18,14 @@ interface HeroSectionProps {
   onOpenPosterModal?: () => void;
   onOpenRegisterModal?: () => void;
   onOpenEmergencyModal?: () => void;
+  onOpenCrewCustomizer?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ 
   onOpenPosterModal,
   onOpenRegisterModal,
-  onOpenEmergencyModal
+  onOpenEmergencyModal,
+  onOpenCrewCustomizer
 }) => {
   return (
     <section
@@ -36,6 +38,53 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute w-[440px] sm:w-[640px] h-[440px] sm:h-[640px] rounded-full border border-purple-500/15" />
       </div>
 
+      {/* FLOATING ZERO-GRAVITY CREWMATE (DECORATIVE THEMED ANIMATION) */}
+      <motion.div
+        animate={{
+          y: [0, -18, 0],
+          rotate: [-4, 4, -4],
+        }}
+        transition={{
+          duration: 5.5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="hidden xl:block absolute right-8 2xl:right-16 top-1/3 z-20 pointer-events-none opacity-85 filter drop-shadow-[0_0_20px_rgba(236,72,153,0.5)]"
+      >
+        <img
+          src="/assets/theme_crewmates/crewmate_9.png"
+          alt="Cosmic Crewmate"
+          className="w-24 2xl:w-28 h-auto object-contain"
+        />
+        <div className="mt-1 px-2.5 py-0.5 rounded-full bg-space-950/90 border border-pink-400/50 text-[9px] font-mono text-pink-300 text-center uppercase tracking-wider backdrop-blur-md">
+          CREW #09
+        </div>
+      </motion.div>
+
+      {/* LEFT SIDE SUBTLE ASTRONAUT CREWMATE */}
+      <motion.div
+        animate={{
+          y: [0, 15, 0],
+          rotate: [3, -3, 3],
+        }}
+        transition={{
+          duration: 6.2,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 1.2,
+        }}
+        className="hidden xl:block absolute left-8 2xl:left-16 top-2/5 z-20 pointer-events-none opacity-85 filter drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]"
+      >
+        <img
+          src="/assets/theme_crewmates/crewmate_6.png"
+          alt="Flight Navigator"
+          className="w-24 2xl:w-28 h-auto object-contain"
+        />
+        <div className="mt-1 px-2.5 py-0.5 rounded-full bg-space-950/90 border border-purple-400/50 text-[9px] font-mono text-purple-300 text-center uppercase tracking-wider backdrop-blur-md">
+          NAVIGATOR
+        </div>
+      </motion.div>
+
       <div className="relative max-w-4xl mx-auto w-full z-10">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -43,78 +92,97 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-center space-y-6"
         >
-          {/* INSTITUTION STATUS BADGE (POSTER SERIF STYLING) */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-space-950/85 border border-cyan-400/40 backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.15)]">
-            <ShieldCheck className="w-4 h-4 text-cyan-400" />
-            <span className="font-cinzel text-xs sm:text-sm font-bold tracking-widest text-cyan-200 uppercase">
-              {eventConfig.collegeName}
-            </span>
-            <span className="hidden sm:inline font-chakra text-[11px] text-purple-300 font-semibold tracking-wider">
-              {eventConfig.collegeSubtitle}
-            </span>
-          </div>
-
-          {/* MAIN POSTER TITLE */}
-          <div className="space-y-2">
-            <motion.h1
-              initial={{ scale: 0.96 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="font-russo text-6xl sm:text-8xl lg:text-9xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-purple-400 text-glow-cyan leading-[1.02]"
-            >
-              {eventConfig.eventName}
-            </motion.h1>
-
-            <div className="inline-block px-4 py-1 rounded-md bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-transparent border-l-4 border-r-4 border-cyan-400">
-              <p className="font-chakra text-xs sm:text-sm font-bold tracking-[0.25em] text-cyan-300 uppercase">
-                {eventConfig.eventTagline}
-              </p>
+          {/* INSTITUTION STATUS BADGE (MATCHING POSTER HEADER) */}
+          <div className="inline-flex flex-col items-center gap-1 px-5 py-2 rounded-2xl bg-space-950/90 border border-cyan-400/40 backdrop-blur-md shadow-[0_0_25px_rgba(0,240,255,0.2)]">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-cyan-400" />
+              <span className="font-cinzel text-xs sm:text-sm md:text-base font-bold tracking-widest text-cyan-100 uppercase">
+                {eventConfig.collegeName}
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-2 font-chakra text-[10px] sm:text-xs text-purple-300 font-semibold tracking-wider uppercase">
+              <span>{eventConfig.collegeSubtitle}</span>
+              <span className="text-cyan-400">•</span>
+              <span>{eventConfig.location}</span>
             </div>
           </div>
 
-          {/* THEME STATEMENT (POSTER STYLING) */}
-          <p className="font-rajdhani text-base sm:text-lg lg:text-xl text-slate-200 font-bold tracking-wide uppercase max-w-2xl mx-auto leading-snug border-t border-b border-white/10 py-3">
-            {eventConfig.eventTheme}
-          </p>
+          {/* MAIN OFFICIAL SYNTRIX'26 LOGO (OFFICIAL TRANSPARENT ASSET) */}
+          <div className="relative flex flex-col items-center justify-center py-2 sm:py-4">
+            {/* Pulsing Multi-Color Radial Background Glow */}
+            <div className="absolute w-[90%] max-w-[700px] h-[160px] sm:h-[220px] bg-gradient-to-r from-cyan-500/20 via-purple-600/25 to-pink-500/20 blur-3xl rounded-full pointer-events-none animate-glow-pulse" />
+
+            <motion.div
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1,
+                y: [0, -6, 0]
+              }}
+              transition={{ 
+                scale: { duration: 0.8, ease: 'easeOut' },
+                opacity: { duration: 0.8 },
+                y: { duration: 4, repeat: Infinity, ease: 'easeInOut' }
+              }}
+              className="relative z-10 w-full max-w-[700px] px-2 sm:px-4 group"
+            >
+              <img
+                src="/assets/syntrix_logo_official.png"
+                alt="SYNTRIX'26 Official Logo"
+                className="w-full h-auto object-contain filter drop-shadow-[0_0_25px_rgba(0,240,255,0.6)] group-hover:drop-shadow-[0_0_40px_rgba(0,240,255,0.85)] transition-all duration-300"
+              />
+            </motion.div>
+          </div>
+
+          {/* THEME STATEMENT (MATCHING POSTER) */}
+          <div className="max-w-2xl mx-auto space-y-1 py-2 border-t border-b border-cyan-500/20">
+            <p className="font-rajdhani text-sm sm:text-lg lg:text-xl text-cyan-200 font-bold tracking-[0.18em] uppercase leading-snug">
+              CELEBRATION OF SOFTWARE FREEDOM DAY
+            </p>
+            <p className="font-mono text-xs text-purple-400 font-semibold tracking-widest">&amp;</p>
+            <p className="font-rajdhani text-sm sm:text-lg lg:text-xl text-purple-200 font-bold tracking-[0.18em] uppercase leading-snug">
+              INTERNATIONAL INNOVATION DAY
+            </p>
+          </div>
 
           {/* EVENT TELEMETRY STRIP (Date, Time, Venue) */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 sm:p-4 rounded-2xl bg-space-950/85 border border-cyan-500/30 backdrop-blur-md shadow-hud-card font-chakra text-xs max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 sm:p-4 rounded-2xl bg-space-950/90 border border-cyan-500/40 backdrop-blur-md shadow-hud-card font-chakra text-xs max-w-2xl mx-auto">
             <div className="flex items-center justify-center sm:justify-start gap-3">
-              <div className="p-2 rounded-xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 shrink-0">
+              <div className="p-2 rounded-xl bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 shrink-0">
                 <Calendar className="w-4 h-4" />
               </div>
               <div className="text-left">
                 <span className="block text-[10px] text-slate-400 uppercase font-semibold">DATE</span>
-                <span className="font-bold text-white text-xs sm:text-sm">18-09-2026</span>
-                <span className="block text-[10px] text-cyan-400 font-semibold">FRIDAY</span>
+                <span className="font-bold text-white text-xs sm:text-sm">{eventConfig.displayDate}</span>
+                <span className="block text-[10px] text-cyan-400 font-semibold">{eventConfig.day}</span>
               </div>
             </div>
 
             <div className="flex items-center justify-center sm:justify-start gap-3 border-y sm:border-y-0 sm:border-x border-white/10 py-2 sm:py-0 px-0 sm:px-3">
-              <div className="p-2 rounded-xl bg-purple-950/80 border border-purple-500/30 text-purple-400 shrink-0">
+              <div className="p-2 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-400 shrink-0">
                 <Clock className="w-4 h-4" />
               </div>
               <div className="text-left">
                 <span className="block text-[10px] text-slate-400 uppercase font-semibold">TIME</span>
                 <span className="font-bold text-white text-xs sm:text-sm">{eventConfig.time}</span>
-                <span className="block text-[10px] text-purple-400 font-semibold">08:30 REPORT</span>
+                <span className="block text-[10px] text-purple-400 font-semibold">STATION LAUNCH</span>
               </div>
             </div>
 
             <div className="flex items-center justify-center sm:justify-start gap-3">
-              <div className="p-2 rounded-xl bg-rose-950/80 border border-rose-500/30 text-rose-400 shrink-0">
+              <div className="p-2 rounded-xl bg-rose-950/80 border border-rose-500/40 text-rose-400 shrink-0">
                 <MapPin className="w-4 h-4" />
               </div>
               <div className="text-left">
                 <span className="block text-[10px] text-slate-400 uppercase font-semibold">VENUE</span>
                 <span className="font-bold text-white text-xs sm:text-sm">{eventConfig.venue}</span>
-                <span className="block text-[10px] text-rose-400 font-semibold">SEMINAR HALL</span>
+                <span className="block text-[10px] text-rose-400 font-semibold">PEC CAMPUS</span>
               </div>
             </div>
           </div>
 
-          {/* ACTION BUTTONS ROW (CLEANLY ALIGNED, ZERO OVERLAPPING) */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          {/* ACTION BUTTONS ROW (FUTURISTIC MISSION CONSOLE CONTROLS) */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
             <NeonButton
               variant="cyan"
               size="lg"
@@ -133,19 +201,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               VIEW EVENTS
             </NeonButton>
 
-            <button
+            <a
+              href={eventConfig.googleFormUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => {
                 soundEngine.playConfirm();
-                if (onOpenRegisterModal) {
+                if (!eventConfig.googleFormUrl && onOpenRegisterModal) {
                   onOpenRegisterModal();
-                } else {
-                  window.location.href = '#register';
                 }
               }}
-              className="px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-chakra font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 hover:from-purple-500 hover:to-rose-500 text-white font-chakra font-bold text-xs sm:text-sm tracking-wider uppercase transition-all shadow-[0_0_25px_rgba(217,70,239,0.4)] hover:shadow-[0_0_35px_rgba(217,70,239,0.7)] cursor-pointer"
             >
-              REGISTER NOW
-            </button>
+              <span>REGISTER NOW</span>
+            </a>
 
             {onOpenPosterModal && (
               <button
@@ -157,6 +226,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               >
                 <Sparkles className="w-4 h-4 text-purple-400" />
                 <span>VIEW POSTER</span>
+              </button>
+            )}
+
+            {onOpenCrewCustomizer && (
+              <button
+                onClick={() => {
+                  soundEngine.playBlip(750);
+                  onOpenCrewCustomizer();
+                }}
+                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 hover:text-white hover:border-cyan-400 font-chakra text-xs font-bold tracking-wider transition-all shadow-[0_0_15px_rgba(0,240,255,0.15)] group"
+                title="Crew Select: Customize Hat & Suit"
+              >
+                <img 
+                  src="/assets/theme_crewmates/crewmate_1.png" 
+                  alt="Crew Select" 
+                  className="w-4 h-4 object-contain group-hover:rotate-12 transition-transform" 
+                />
+                <span>CREW SELECT</span>
               </button>
             )}
 

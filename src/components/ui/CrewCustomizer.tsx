@@ -44,7 +44,7 @@ export const CrewCustomizer: React.FC<CrewCustomizerProps> = ({ onClose }) => {
     } else if (newCount === 9) {
       setDialogText("ARE YOU THE IMPOSTOR? 🚨");
     } else if (newCount >= 12) {
-      setDialogText("ALL CLEAR! REPORT TO SEMINAR HALL 🚀");
+      setDialogText("ALL CLEAR! REPORT TO AI&DS BLOCK 🚀");
     }
   };
 

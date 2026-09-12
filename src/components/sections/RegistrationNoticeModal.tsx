@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { eventConfig } from '../../config/eventConfig';
 import { soundEngine } from '../../lib/soundEffects';
-import { ShieldAlert, X, Mail, Radio } from 'lucide-react';
+import { ShieldAlert, X, Phone, Radio } from 'lucide-react';
 
 interface RegistrationNoticeModalProps {
   isOpen: boolean;
@@ -84,12 +83,15 @@ export const RegistrationNoticeModal: React.FC<RegistrationNoticeModalProps> = (
 
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <a
-              href={`mailto:${eventConfig.officialEmail}`}
-              onClick={() => soundEngine.playConfirm()}
-              className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-orbitron text-xs font-bold tracking-wider flex items-center justify-center gap-2"
+              href="#contact"
+              onClick={() => {
+                soundEngine.playConfirm();
+                onClose();
+              }}
+              className="w-full py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-orbitron text-xs font-bold tracking-wider flex items-center justify-center gap-2"
             >
-              <Mail className="w-4 h-4" />
-              <span>EMAIL COORDINATOR</span>
+              <Phone className="w-4 h-4" />
+              <span>MISSION CONTROL</span>
             </a>
 
             <button

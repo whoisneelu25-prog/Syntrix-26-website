@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { eventConfig } from '../../config/eventConfig';
 import { soundEngine } from '../../lib/soundEffects';
-import { Volume2, VolumeX, Menu, X, Rocket, Sparkles, UserPlus } from 'lucide-react';
+import { Volume2, VolumeX, Menu, X, Sparkles, UserPlus } from 'lucide-react';
 import { NeonButton } from '../ui/NeonButton';
 
 interface NavbarProps {
-  onOpenRegisterModal: () => void;
+  onOpenRegisterModal?: () => void;
   onReplayIntro?: () => void;
+  onOpenEmergencyModal?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenRegisterModal, onReplayIntro }) => {
+export const Navbar: React.FC<NavbarProps> = ({ 
+  onOpenRegisterModal, 
+  onReplayIntro,
+  onOpenEmergencyModal 
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [audioActive, setAudioActive] = useState(() => soundEngine.getIsAudioEnabled());
@@ -45,10 +50,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenRegisterModal, onReplayInt
 
   const handleRegisterClick = () => {
     soundEngine.playConfirm();
-    if (eventConfig.googleFormUrl === 'YOUR_GOOGLE_FORM_LINK_HERE') {
-      onOpenRegisterModal();
-    } else {
+    if (eventConfig.googleFormUrl) {
       window.open(eventConfig.googleFormUrl, '_blank', 'noopener,noreferrer');
+    } else if (onOpenRegisterModal) {
+      onOpenRegisterModal();
     }
   };
 
@@ -57,34 +62,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenRegisterModal, onReplayInt
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-space-950/85 backdrop-blur-md border-b border-cyan-500/25 py-2 shadow-[0_4px_30px_rgba(0,0,0,0.8)]'
-            : 'bg-transparent py-4'
+            ? 'bg-space-950/90 backdrop-blur-md border-b border-cyan-500/25 py-2 shadow-[0_4px_30px_rgba(0,0,0,0.8)]'
+            : 'bg-transparent py-3'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             
-            {/* BRAND LOGO */}
+            {/* BRAND LOGO (OFFICIAL POSTER ASSET) */}
             <a
               href="#hero"
               onClick={() => soundEngine.playBlip(800)}
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-2 sm:gap-3 group"
+              aria-label="SYNTRIX'26 Home"
             >
-              <div className="relative w-9 h-9 rounded-lg bg-space-900 border border-cyan-400/40 flex items-center justify-center group-hover:border-cyan-300 group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all">
-                <Rocket className="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <div className="relative h-9 sm:h-10 w-auto flex items-center">
+                <img
+                  src="/assets/syntrix_logo_official.png"
+                  alt="SYNTRIX'26"
+                  className="h-8 sm:h-9 w-auto object-contain drop-shadow-[0_0_12px_rgba(0,240,255,0.6)] group-hover:drop-shadow-[0_0_20px_rgba(0,240,255,0.9)] transition-all"
+                />
               </div>
 
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-orbitron font-black text-lg sm:text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-purple-400">
-                    {eventConfig.eventName}
-                  </span>
-                  <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-cyan-950/70 text-cyan-300 border border-cyan-500/30">
-                    LOBBY
-                  </span>
-                </div>
-                <p className="text-[9px] font-mono tracking-widest text-slate-400 hidden sm:block">
+              <div className="hidden sm:block">
+                <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-cyan-950/70 text-cyan-300 border border-cyan-500/30">
+                  LOBBY
+                </span>
+                <p className="text-[8px] font-mono tracking-widest text-slate-400 uppercase">
                   PRATHYUSHA ENG COLLEGE
                 </p>
               </div>
@@ -126,6 +130,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenRegisterModal, onReplayInt
                 )}
               </button>
 
+              {/* Emergency Meeting Easter Egg Trigger */}
+              {onOpenEmergencyModal && (
+                <button
+                  onClick={onOpenEmergencyModal}
+                  className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-red-500/40 bg-red-950/40 text-red-400 hover:text-white hover:border-red-400 hover:bg-red-900/60 text-xs font-mono transition-all shadow-[0_0_10px_rgba(239,68,68,0.2)]"
+                  title="EMERGENCY ALERT // DO NOT PRESS"
+                  aria-label="Trigger Emergency Meeting Easter Egg"
+                >
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+                  <span className="hidden xl:inline text-[10px] font-bold tracking-wider">EMERGENCY</span>
+                </button>
+              )}
+
               {/* Replay Intro Button */}
               {onReplayIntro && (
                 <button
@@ -143,8 +160,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenRegisterModal, onReplayInt
                 variant="cyan"
                 size="sm"
                 onClick={handleRegisterClick}
-                className="hidden sm:inline-flex"
-                icon={<UserPlus className="w-3.5 h-3.5" />}
+                className="hidden sm:inline-flex shrink-0 font-orbitron font-bold"
+                icon={<UserPlus className="w-4 h-4" />}
               >
                 JOIN THE CREW
               </NeonButton>

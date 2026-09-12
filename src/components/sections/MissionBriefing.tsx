@@ -6,10 +6,9 @@ import {
   Radio, 
   MapPin, 
   Calendar, 
-  School, 
   Terminal, 
-  CheckCircle2,
-  AlertCircle
+  Target,
+  CheckCircle2
 } from 'lucide-react';
 
 export const MissionBriefing: React.FC = () => {
@@ -19,7 +18,7 @@ export const MissionBriefing: React.FC = () => {
         
         {/* SECTION HEADER */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 font-mono text-xs tracking-widest uppercase">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 font-mono text-xs tracking-widest uppercase">
             <Radio className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
             DIRECTIVE BROADCAST // PROTOCOL PEC-2026
           </div>
@@ -31,6 +30,36 @@ export const MissionBriefing: React.FC = () => {
           <p className="font-mono text-xs sm:text-sm text-slate-400 tracking-wider uppercase max-w-xl mx-auto">
             Official operational parameters for all arriving crewmates
           </p>
+        </div>
+
+        {/* KEY HUD TELEMETRY GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-4 rounded-xl bg-space-900/90 border border-cyan-500/40 backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.15)] flex flex-col items-center text-center"
+          >
+            <MapPin className="w-4 h-4 text-cyan-400 mb-1" />
+            <span className="font-mono text-[9px] text-slate-400 tracking-wider uppercase">LOCATION</span>
+            <span className="font-orbitron font-extrabold text-xs sm:text-sm text-white">{eventConfig.venue}</span>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-4 rounded-xl bg-space-900/90 border border-purple-500/40 backdrop-blur-md shadow-[0_0_15px_rgba(168,85,247,0.15)] flex flex-col items-center text-center"
+          >
+            <Calendar className="w-4 h-4 text-purple-400 mb-1" />
+            <span className="font-mono text-[9px] text-slate-400 tracking-wider uppercase">DATE</span>
+            <span className="font-orbitron font-extrabold text-xs sm:text-sm text-purple-200">18.09.2026</span>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -3 }}
+            className="p-4 rounded-xl bg-space-900/90 border border-cyan-400/40 backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.15)] flex flex-col items-center text-center"
+          >
+            <Target className="w-4 h-4 text-cyan-300 mb-1" />
+            <span className="font-mono text-[9px] text-slate-400 tracking-wider uppercase">OBJECTIVE</span>
+            <span className="font-orbitron font-extrabold text-[11px] sm:text-xs text-cyan-300">INNOVATE • CREATE • SOLVE</span>
+          </motion.div>
         </div>
 
         {/* TERMINAL DOSSIER */}
@@ -46,33 +75,33 @@ export const MissionBriefing: React.FC = () => {
           >
             <HUDPanel title="CREWMATE DIRECTIVE" code="TX-2026.SFD" glowColor="cyan">
               <div className="space-y-4">
-                <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-950/30 border border-cyan-500/20 text-cyan-300 font-mono text-xs">
+                <div className="flex items-start gap-3 p-3 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-cyan-300 font-mono text-xs">
                   <Terminal className="w-4 h-4 mt-0.5 shrink-0 text-cyan-400" />
                   <p>
                     <span className="font-bold uppercase tracking-wider text-white">WELCOME, CREWMATE.</span>
                     <br />
-                    Your mission is to explore groundbreaking ideas, challenge your computational creativity, and prove your engineering mastery.
+                    Your mission is to explore groundbreaking ideas, challenge computational creativity, and deploy engineering mastery across four classified sectors.
                   </p>
                 </div>
 
                 <div className="space-y-3 text-slate-300 text-sm sm:text-base leading-relaxed">
                   <p>
-                    In commemoration of <strong className="text-cyan-300 font-medium">Software Freedom Day</strong> and <strong className="text-purple-300 font-medium">International Innovation Day</strong>, <span className="text-white font-semibold">Prathyusha Engineering College</span> invites visionary minds to participate in <span className="text-cyan-400 font-orbitron font-bold">SYNTRIX'26</span>.
+                    In celebration of <strong className="text-cyan-300 font-medium">Software Freedom Day</strong> &amp; <strong className="text-purple-300 font-medium">International Innovation Day</strong>, <span className="text-white font-semibold">Prathyusha Engineering College</span> opens the dropship lobby for <span className="text-cyan-400 font-orbitron font-bold">SYNTRIX'26</span>.
                   </p>
                   <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-mono">
-                    Whether you are unveiling research in <strong className="text-slate-200">PAPER 404</strong>, steering algorithmic cognition in <strong className="text-slate-200">PROMPT CRAFT</strong>, deciphering digital forensics in <strong className="text-slate-200">AI CASE FILE</strong>, or delivering wild pitch rhetoric in <strong className="text-slate-200">CRAZY PITCH</strong> — your task is clear: innovate without constraints.
+                    Engage in forensic cyber puzzles in <strong className="text-cyan-300">AI CASE FILE</strong>, orchestrate generative intelligence in <strong className="text-cyan-300">PROMPT CRAFT</strong>, unveil original research in <strong className="text-purple-300">PAPER 404</strong>, or pitch bold on-the-spot concepts in <strong className="text-pink-300">CRAZY PITCH</strong>.
                   </p>
                 </div>
 
-                {/* MISSION OBJECTIVES LIST */}
+                {/* MISSION OBJECTIVES */}
                 <div className="pt-2 border-t border-cyan-500/20 space-y-2">
                   <span className="block font-mono text-[11px] text-cyan-400 tracking-wider uppercase font-bold">
-                    CORE MISSION OBJECTIVES:
+                    PRIMARY PROTOCOLS:
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-xs text-slate-300">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                      <span>Defend Open-Source Freedom</span>
+                      <span>Defend Software Freedom</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -80,11 +109,11 @@ export const MissionBriefing: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                      <span>Overcome System Anomalies</span>
+                      <span>Solve Under Strict Time Limits</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                      <span>Showcase Disruptive Pitch Power</span>
+                      <span>Pitch The Impossible Like A Unicorn</span>
                     </div>
                   </div>
                 </div>
@@ -92,72 +121,59 @@ export const MissionBriefing: React.FC = () => {
             </HUDPanel>
           </motion.div>
 
-          {/* RIGHT: SECTOR PARAMETERS & TELEMETRY (5 COLS) */}
+          {/* RIGHT: CREWMATE TERMINAL WORKSTATION (5 COLS) */}
           <motion.div
             initial={{ opacity: 0, x: 25 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 flex flex-col justify-between space-y-4"
+            className="lg:col-span-5 flex flex-col justify-between"
           >
-            {/* PARAMETER 1: DATE & DAY */}
-            <div className="p-4 rounded-xl bg-space-900/80 border border-cyan-500/25 backdrop-blur-md flex items-center gap-4 hover:border-cyan-400/50 transition-colors">
-              <div className="p-3 rounded-xl bg-cyan-950/80 border border-cyan-400/30 text-cyan-400 shrink-0">
-                <Calendar className="w-5 h-5" />
-              </div>
-              <div className="min-w-0">
-                <span className="block font-mono text-[10px] text-slate-400 uppercase tracking-widest">
-                  EVENT DATE // LAUNCH WINDOW
-                </span>
-                <span className="font-orbitron font-bold text-white text-base sm:text-lg tracking-wider">
-                  18 SEPTEMBER 2026
-                </span>
-                <span className="block font-mono text-xs text-cyan-300 font-semibold">
-                  FRIDAY • 09:00 AM ONWARD
-                </span>
-              </div>
-            </div>
+            <div className="h-full rounded-2xl bg-space-950/90 border border-cyan-500/30 p-6 backdrop-blur-md flex flex-col justify-between relative overflow-hidden group">
+              {/* Terminal Background Glow */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+              
+              <div className="space-y-4 relative z-10">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                    <span className="font-mono text-xs text-cyan-300 font-bold uppercase tracking-widest">
+                      LOBBY TERMINAL 01
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-slate-500">SYSTEM ID: PEC-SYNTRIX</span>
+                </div>
 
-            {/* PARAMETER 2: LOCATION & VENUE */}
-            <div className="p-4 rounded-xl bg-space-900/80 border border-purple-500/25 backdrop-blur-md flex items-center gap-4 hover:border-purple-400/50 transition-colors">
-              <div className="p-3 rounded-xl bg-purple-950/80 border border-purple-400/30 text-purple-400 shrink-0">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div className="min-w-0">
-                <span className="block font-mono text-[10px] text-slate-400 uppercase tracking-widest">
-                  MISSION COORDINATES // VENUE
-                </span>
-                <span className="font-orbitron font-bold text-white text-base sm:text-lg tracking-wider">
-                  {eventConfig.venue}
-                </span>
-                <span className="block font-mono text-xs text-purple-300">
-                  Main Academic Block
-                </span>
-              </div>
-            </div>
+                {/* Animated Crewmate at Work */}
+                <div className="py-4 flex items-center justify-center">
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                    className="relative flex flex-col items-center"
+                  >
+                    <img
+                      src="/assets/theme_crewmates/crewmate_1.png"
+                      alt="Crewmate Working at Terminal"
+                      className="w-24 sm:w-28 h-auto object-contain filter drop-shadow-[0_0_15px_rgba(0,240,255,0.5)]"
+                    />
+                    <div className="w-20 h-3 bg-black/80 rounded-full blur-[2px] mt-1" />
+                    <div className="absolute -top-3 -right-2 px-2 py-0.5 rounded bg-cyan-950/90 border border-cyan-400 text-[10px] font-mono text-cyan-300 animate-pulse">
+                      STATUS: ONLINE 💻
+                    </div>
+                  </motion.div>
+                </div>
 
-            {/* PARAMETER 3: COLLEGE IDENTITY */}
-            <div className="p-4 rounded-xl bg-space-900/80 border border-cyan-500/25 backdrop-blur-md flex items-center gap-4 hover:border-cyan-400/50 transition-colors">
-              <div className="p-3 rounded-xl bg-space-850 border border-cyan-400/30 text-cyan-400 shrink-0">
-                <School className="w-5 h-5" />
+                <div className="p-3 rounded-xl bg-space-900/80 border border-cyan-500/20 font-mono text-xs text-slate-300 space-y-1">
+                  <div className="text-cyan-400 font-bold">&gt; MISSION TELEMETRY NOMINAL</div>
+                  <div className="text-slate-400 text-[11px]">&gt; FOUR MISSION PATHS DETECTED</div>
+                  <div className="text-emerald-400 text-[11px]">&gt; CHOOSE YOUR ASSIGNMENT BELOW</div>
+                </div>
               </div>
-              <div className="min-w-0">
-                <span className="block font-mono text-[10px] text-slate-400 uppercase tracking-widest">
-                  HOST STATION // INSTITUTION
-                </span>
-                <span className="font-orbitron font-bold text-white text-sm sm:text-base leading-snug">
-                  {eventConfig.collegeName}
-                </span>
-                <span className="block font-mono text-[11px] text-slate-400">
-                  {eventConfig.collegeSubtitle} • {eventConfig.location}
-                </span>
-              </div>
-            </div>
 
-            {/* STATUS ALERT */}
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
-              <AlertCircle className="w-4 h-4 shrink-0 text-emerald-400" />
-              <span>All registered crewmates will be awarded official Mission Certificates.</span>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-slate-400 relative z-10">
+                <span>{eventConfig.venue} HQ</span>
+                <span className="text-cyan-400 font-bold">18-09-2026</span>
+              </div>
             </div>
           </motion.div>
 

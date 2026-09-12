@@ -7,17 +7,22 @@ export interface EventItem {
   id: string;
   name: string;
   category: 'Technical' | 'Non-Technical';
+  subtitle: string;
   shortDescription: string;
   fullDescription: string;
   tagline: string;
   iconName: 'FileCode2' | 'Terminal' | 'BrainCircuit' | 'Rocket';
   badge: string;
-  rules: string[];
-  eligibility: string;
+  round: string;
   teamSize: string;
   duration: string;
+  topic?: string;
+  concept?: string;
+  animatedTagline?: string;
+  examplePrompts?: string[];
+  rules: string[];
+  eligibility?: string;
   venue?: string;
-  importantInstructions?: string[];
   registrationLink: string;
 }
 
@@ -25,14 +30,7 @@ export interface Coordinator {
   role: string;
   name: string;
   phone: string;
-  email: string;
-}
-
-export interface PrizeItem {
-  place: string;
-  title: string;
-  reward: string;
-  perks: string[];
+  displayPhone: string;
 }
 
 export interface AnnouncementConfig {
@@ -41,6 +39,12 @@ export interface AnnouncementConfig {
   badgeText: string;
   actionText?: string;
   actionUrl?: string;
+}
+
+export interface PrizeItem {
+  place: string;
+  reward: string;
+  perks?: string[];
 }
 
 export interface EventConfig {
@@ -64,29 +68,23 @@ export interface EventConfig {
   countdownDate: string; // ISO 8601 format
 
   googleFormUrl: string;
+  registrationLink: string;
 
   announcement: AnnouncementConfig;
 
   events: EventItem[];
 
-  // Configurable prizes array: if empty, the UI section gracefully hides
   prizes: PrizeItem[];
 
   coordinators: Coordinator[];
-  officialEmail: string;
-
-  socials: {
-    instagram?: string;
-    linkedin?: string;
-    github?: string;
-    website?: string;
-  };
 }
 
+export const OFFICIAL_REGISTRATION_URL = "https://docs.google.com/forms/d/e/1FAIpQLScPt36IAj0Zghi8N28lhx7fcman_dblQ3AZkDM1Ql8ewN8cJQ/viewform";
+
 export const eventConfig: EventConfig = {
-  collegeName: "Prathyusha Engineering College",
-  collegeSubtitle: "(An Autonomous Institution)",
-  location: "Aranvoyal Kuppam, Tiruvallur",
+  collegeName: "PRATHYUSHA ENGINEERING COLLEGE",
+  collegeSubtitle: "(AN AUTONOMOUS INSTITUTION)",
+  location: "ARANVOYAL KUPPAM, TIRUVALLUR",
   collegeCoords: {
     lat: "13.0827° N",
     lng: "80.2707° E"
@@ -94,138 +92,163 @@ export const eventConfig: EventConfig = {
 
   eventName: "SYNTRIX'26",
   eventEdition: "2026",
-  eventTheme: "Celebration of Software Freedom Day & International Innovation Day",
+  eventTheme: "CELEBRATION OF SOFTWARE FREEDOM DAY & INTERNATIONAL INNOVATION DAY",
   eventTagline: "YOUR NEXT MISSION AWAITS",
 
   date: "2026-09-18",
   displayDate: "18-09-2026",
-  day: "Friday",
-  time: "09:00 AM",
-  venue: "Seminar Hall",
+  day: "FRIDAY",
+  time: "9:00 AM",
+  venue: "AI&DS BLOCK",
 
   countdownDate: "2026-09-18T09:00:00",
 
-  googleFormUrl: "YOUR_GOOGLE_FORM_LINK_HERE",
+  googleFormUrl: OFFICIAL_REGISTRATION_URL,
+  registrationLink: OFFICIAL_REGISTRATION_URL,
 
   announcement: {
     enabled: true,
-    message: "MISSION DETECTED: SYNTRIX'26 REGISTRATIONS PREPARING FOR LAUNCH",
+    message: "MISSION DETECTED: SYNTRIX'26 REGISTRATION CONSOLE IS ONLINE",
     badgeText: "TRANSMISSION LIVE",
-    actionText: "VIEW MISSIONS",
+    actionText: "ENTER THE MISSION",
     actionUrl: "#events"
   },
 
   events: [
     {
-      id: "paper-404",
-      name: "PAPER 404",
-      category: "Technical",
-      tagline: "Research Paradigm & Tech Symposium",
-      shortDescription: "A flagship technical paper symposium challenging crewmates to present innovative computing paradigms, algorithms, and architectures.",
-      fullDescription: "PAPER 404 is the premier technical symposium of SYNTRIX'26. Crewmates present original research and engineering proposals addressing emerging technological frontiers, open-source innovations, artificial intelligence, and cybersecurity.",
-      iconName: "FileCode2",
-      badge: "SECTOR: RESEARCH",
-      rules: [], // User will provide specific rules; component gracefully shows placeholder
-      eligibility: "Open to all engineering & technology students",
-      teamSize: "1 - 3 Crewmates",
-      duration: "10 mins presentation + 5 mins Q&A",
-      venue: "Seminar Hall - Track A",
-      importantInstructions: [
-        "Participants must bring their presentations in PPT/PDF format on a flash drive.",
-        "Plagiarism above acceptable limits will result in immediate disqualification.",
-        "Strict adherence to the 10-minute presentation limit is enforced."
-      ],
-      registrationLink: "YOUR_GOOGLE_FORM_LINK_HERE"
-    },
-    {
-      id: "prompt-craft",
-      name: "PROMPT CRAFT",
-      category: "Technical",
-      tagline: "AI Orchestration & Prompt Engineering",
-      shortDescription: "Master generative AI protocols. Formulate precision prompts to solve algorithmic anomalies and design computational solutions.",
-      fullDescription: "PROMPT CRAFT puts your AI steering capabilities to the test. Crewmates interact with advanced generative models to solve riddles, produce targeted logic, synthesize code, and unlock multi-stage prompt challenges under time pressure.",
-      iconName: "Terminal",
-      badge: "SECTOR: GEN-AI",
-      rules: [],
-      eligibility: "Open to all departments and skill levels",
-      teamSize: "1 - 2 Crewmates",
-      duration: "60 Minutes",
-      venue: "Computer Lab 3",
-      importantInstructions: [
-        "Systems with designated AI interface access will be provided.",
-        "Use of unauthorized external tabs or search engines is strictly monitored by telemetry.",
-        "Scoring is evaluated based on output accuracy, iteration speed, and token efficiency."
-      ],
-      registrationLink: "YOUR_GOOGLE_FORM_LINK_HERE"
-    },
-    {
       id: "ai-case-file",
       name: "AI CASE FILE",
       category: "Technical",
-      tagline: "Forensic Data & Algorithmic Investigation",
-      shortDescription: "A cyber-investigation mission. Analyze anomalous datasets, identify model vulnerabilities, and resolve critical digital mysteries.",
-      fullDescription: "AI CASE FILE is a thrilling tech detective challenge. A catastrophic data breach and corrupted neural model threaten the station. Your team must inspect logs, identify bias or hallucination vectors, trace illicit pipelines, and submit the final forensic dossier.",
+      subtitle: "AI-Based Mystery & Investigation",
+      tagline: "ANALYZE. SOLVE. UNLOCK.",
+      shortDescription: "Solve the digital anomaly using clues and evidence provided under timed conditions.",
+      fullDescription: "AI CASE FILE is an intense cyber-investigation challenge. A suspicious anomaly threatens the dropship mission telemetry. Your team must inspect the clues and evidence provided, identify the root cause, and submit the final forensic verdict with solid reasoning.",
       iconName: "BrainCircuit",
-      badge: "SECTOR: CYBER & ML",
-      rules: [],
-      eligibility: "Open to all undergraduate tech students",
-      teamSize: "2 - 3 Crewmates",
-      duration: "90 Minutes",
-      venue: "Data Center Lab",
-      importantInstructions: [
-        "Teams will be granted access to simulated server logs and model checkpoints.",
-        "All investigative findings must be summarized in the digital case dossier.",
-        "Collaboration across teams is considered sabotage."
+      badge: "MISSION: FORENSICS",
+      round: "Single Round",
+      teamSize: "2–3 members",
+      duration: "65 mins",
+      venue: "AI&DS Block",
+      rules: [
+        "Solve the case using the clues and evidence provided.",
+        "Use only the materials given during the event.",
+        "Mobile phones, internet, AI tools, and outside help are not allowed.",
+        "Submit the final answer with brief reasoning/evidence.",
+        "Sharing answers or clues with other teams is prohibited.",
+        "Fastest valid submission wins in case of a tie.",
+        "Malpractice leads to disqualification."
       ],
-      registrationLink: "YOUR_GOOGLE_FORM_LINK_HERE"
+      registrationLink: OFFICIAL_REGISTRATION_URL
     },
     {
-      id: "crazy-pitch",
+      id: "promptcraft",
+      name: "PROMPT CRAFT",
+      category: "Technical",
+      subtitle: "AI Prompt Engineering Challenge",
+      tagline: "IDEAS IN. INNOVATION OUT.",
+      shortDescription: "Formulate high-precision AI prompts to generate targeted outputs with zero manual post-editing.",
+      fullDescription: "PROMPT CRAFT puts your AI prompt orchestration skills to the test. Formulate powerful, creative, and strictly constrained prompts to guide models to target results accurately and creatively without manual modifications.",
+      iconName: "Terminal",
+      badge: "MISSION: GEN-AI",
+      round: "Single Round",
+      teamSize: "2 members (Duo)",
+      duration: "65 mins",
+      venue: "AI&DS Block",
+      rules: [
+        "Create effective prompts based on the given task.",
+        "Submit the final prompt along with its generated output.",
+        "No manual editing of the generated output.",
+        "Copying another team's prompt/output is prohibited.",
+        "Evaluation: Prompt Quality + Accuracy + Creativity + Output Quality.",
+        "Malpractice or violation of the rules leads to disqualification."
+      ],
+      registrationLink: OFFICIAL_REGISTRATION_URL
+    },
+    {
+      id: "paper-404",
+      name: "PAPER 404",
+      category: "Technical",
+      subtitle: "Technical Presentation Challenge",
+      tagline: "DECODE IDEAS. REWRITE POSSIBILITIES.",
+      shortDescription: "Deliver an original, high-impact technical presentation on the announced domain.",
+      fullDescription: "PAPER 404 is the premier technical symposium of SYNTRIX'26. Teams deliver an original, plagiarism-free technical presentation demonstrating sound technical knowledge, innovation, and relevance.",
+      iconName: "FileCode2",
+      badge: "MISSION: RESEARCH",
+      round: "Single Round",
+      teamSize: "2–3 members",
+      duration: "4 mins per team",
+      topic: "TOPIC WILL BE ANNOUNCED SOON",
+      venue: "AI&DS Block",
+      rules: [
+        "Presentation must be original and plagiarism-free.",
+        "All team members must participate.",
+        "PPT/presentation materials may be used as permitted by organizers.",
+        "Evaluation: Technical Knowledge + Innovation + Relevance + Presentation.",
+        "Exceeding the time limit may result in score deduction."
+      ],
+      registrationLink: OFFICIAL_REGISTRATION_URL
+    },
+    {
+      id: "crazy-startup",
       name: "CRAZY PITCH",
       category: "Non-Technical",
-      tagline: "Disruptive Ideation & Pitch Showdown",
-      shortDescription: "The ultimate ideation and persuasive showdown. Pitch eccentric, unorthodox, and wildly innovative concepts with theatrical flair.",
-      fullDescription: "CRAZY PITCH unleashes pure creative adrenaline. Ever wondered how to pitch teleportation for pizzas or AI-powered umbrellas for astronauts? Convince our panel of venture judges with compelling rhetoric, outrageous mockups, and razor-sharp market logic.",
-      iconName: "Rocket",
-      badge: "SECTOR: INNOVATION",
-      rules: [],
-      eligibility: "Open to all students from any discipline",
-      teamSize: "2 - 4 Crewmates",
-      duration: "5 mins pitch + 3 mins jury interrogation",
-      venue: "Main Auditorium",
-      importantInstructions: [
-        "Props, theatrical elements, and creative presentation decks are strongly encouraged.",
-        "Ideas can be fictional or wildly futuristic, but internal pitch logic must be watertight.",
-        "Audience response will contribute to the Innovation Score."
+      subtitle: "On-the-Spot Startup Pitch",
+      tagline: "BOLD IDEAS. BIGGER IMPACT.",
+      shortDescription: "Take a completely random, absurd topic on the spot and pitch it like the next billion-dollar unicorn.",
+      fullDescription: "CRAZY PITCH is an adrenaline-charged ideation challenge. You will receive an unexpected, absurd topic on the spot. Your mission: turn it into a crazy startup concept and pitch it like it is the next billion-dollar company.",
+      concept: "Take a completely random topic and turn it into a crazy startup idea. Pitch it like it is the next billion-dollar company.",
+      animatedTagline: "MAKE THE IMPOSSIBLE SOUND INVESTABLE.",
+      topic: "A RANDOM, ABSURD OR UNEXPECTED TOPIC WILL BE GIVEN ON THE SPOT.",
+      examplePrompts: [
+        "A Wi-Fi enabled water bottle.",
+        "A chair that gives career advice.",
+        "A smart umbrella for indoor use.",
+        "A subscription service for borrowing friends.",
+        "A startup for people who hate weekends."
       ],
-      registrationLink: "YOUR_GOOGLE_FORM_LINK_HERE"
+      iconName: "Rocket",
+      badge: "MISSION: INNOVATION",
+      round: "Single Round",
+      teamSize: "2 members (Duo)",
+      duration: "5 mins",
+      venue: "AI&DS Block",
+      rules: [
+        "No mobile phones, laptops, internet, PPT, or AI tools.",
+        "Be creative, crazy, funny, or completely absurd.",
+        "Offensive or inappropriate content is not allowed.",
+        "Malpractice leads to disqualification."
+      ],
+      registrationLink: OFFICIAL_REGISTRATION_URL
     }
   ],
 
-  // Left empty so the section automatically hides as required by the user prompt.
-  // When prize data is added in the future, the UI will automatically render the rewards.
   prizes: [],
 
   coordinators: [
     {
-      role: "Faculty Event Coordinator",
-      name: "Department Faculty Coordinator",
-      phone: "+91 9XXXXXXXXX",
-      email: "syntrix26@prathyusha.edu.in"
+      role: "EVENT COORDINATOR",
+      name: "Datshin KS",
+      phone: "7845390496",
+      displayPhone: "7845390496"
     },
     {
-      role: "Student Crew Lead",
-      name: "Student Coordinator",
-      phone: "+91 9XXXXXXXXX",
-      email: "syntrix26@prathyusha.edu.in"
+      role: "EVENT COORDINATOR",
+      name: "Monisha J",
+      phone: "+918248078959",
+      displayPhone: "+91 82480 78959"
+    },
+    {
+      role: "EVENT COORDINATOR",
+      name: "VC Neeleash",
+      phone: "7395989526",
+      displayPhone: "7395989526"
+    },
+    {
+      role: "STAFF COORDINATOR",
+      name: "Ms. Sivaganga",
+      phone: "+917530022365",
+      displayPhone: "+91 75300 22365"
     }
-  ],
-
-  officialEmail: "syntrix26@prathyusha.edu.in",
-
-  socials: {
-    instagram: "https://instagram.com",
-    linkedin: "https://linkedin.com",
-    website: "https://prathyusha.edu.in"
-  }
+  ]
 };
+

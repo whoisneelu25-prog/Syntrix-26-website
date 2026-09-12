@@ -159,19 +159,31 @@ export const RulesSection: React.FC = () => {
                           </div>
                         )}
 
+                        {/* Topic Directive if present */}
+                        {event.topic && (
+                          <div className="p-3 rounded-lg bg-cyan-950/40 border border-cyan-500/30 text-xs font-mono">
+                            <span className="text-cyan-400 font-bold uppercase block text-[10px]">MISSION TOPIC:</span>
+                            <span className="text-white font-semibold">{event.topic}</span>
+                          </div>
+                        )}
+
                         {/* Event Quick Specs */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2 text-[11px] text-slate-400 border-t border-white/5">
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-[11px] text-slate-400 border-t border-white/5 font-mono">
                           <div>
-                            <span className="text-slate-500 uppercase block">TEAM SIZE</span>
+                            <span className="text-slate-500 uppercase block text-[10px]">TEAM SIZE</span>
                             <span className="text-white font-bold">{event.teamSize}</span>
                           </div>
                           <div>
-                            <span className="text-slate-500 uppercase block">DURATION</span>
+                            <span className="text-slate-500 uppercase block text-[10px]">ROUND</span>
+                            <span className="text-white font-bold">{event.round || 'Single Round'}</span>
+                          </div>
+                          <div>
+                            <span className="text-slate-500 uppercase block text-[10px]">TIME</span>
                             <span className="text-white font-bold">{event.duration}</span>
                           </div>
-                          <div className="col-span-2 sm:col-span-1">
-                            <span className="text-slate-500 uppercase block">ELIGIBILITY</span>
-                            <span className="text-white font-bold truncate block">{event.eligibility}</span>
+                          <div>
+                            <span className="text-slate-500 uppercase block text-[10px]">VENUE</span>
+                            <span className="text-white font-bold">{event.venue || 'AI&DS Block'}</span>
                           </div>
                         </div>
 

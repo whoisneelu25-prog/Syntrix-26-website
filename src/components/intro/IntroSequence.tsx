@@ -128,15 +128,9 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
       transition={{ duration: isCameraShaking ? 0.35 : 0.4 }}
       onClick={() => {
         soundEngine.initContext();
-        if (soundEngine.getIsAudioEnabled()) {
-          soundEngine.startAmbient();
-        }
       }}
       onPointerDown={() => {
         soundEngine.initContext();
-        if (soundEngine.getIsAudioEnabled()) {
-          soundEngine.startAmbient();
-        }
       }}
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-space-950 select-none cursor-pointer"
     >
@@ -461,14 +455,18 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
             </motion.div>
 
             {/* SYNTRIX'26 GRAND TITLE */}
-            <motion.h1
+            <motion.div
               initial={{ scale: 0.75, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.25, type: 'spring', stiffness: 140 }}
-              className="font-russo text-5xl sm:text-7xl md:text-8xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-200 to-purple-400 text-glow-cyan mb-2"
+              className="w-full max-w-md sm:max-w-lg mb-4 flex justify-center"
             >
-              SYNTRIX'26
-            </motion.h1>
+              <img
+                src="/assets/syntrix_logo_official.png"
+                alt="SYNTRIX'26"
+                className="w-full h-auto object-contain filter drop-shadow-[0_0_35px_rgba(0,240,255,0.7)]"
+              />
+            </motion.div>
 
             {/* OFFICIAL THEME SUBTITLE */}
             <motion.p
@@ -497,7 +495,7 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
               </div>
               <div>
                 <span className="block text-[10px] text-cyan-400 uppercase tracking-widest font-mono">VENUE</span>
-                <span className="font-bold text-white tracking-wider">SEMINAR HALL</span>
+                <span className="font-bold text-white tracking-wider">AI&DS BLOCK</span>
               </div>
             </motion.div>
 

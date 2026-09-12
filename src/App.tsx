@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { eventConfig, type EventItem } from './config/eventConfig';
 import { soundEngine } from './lib/soundEffects';
 
@@ -28,6 +28,8 @@ import { Footer } from './components/layout/Footer';
 import { RegistrationNoticeModal } from './components/sections/RegistrationNoticeModal';
 import { PosterModal } from './components/sections/PosterModal';
 import { EmergencyMeetingModal } from './components/ui/EmergencyMeetingModal';
+import { MissionProgressHUD } from './components/ui/MissionProgressHUD';
+import { CrewCustomizer } from './components/ui/CrewCustomizer';
 
 export function App() {
   const [showIntro, setShowIntro] = useState<boolean>(() => {
@@ -38,6 +40,7 @@ export function App() {
     }
     return true;
   });
+
   const [selectedEventModal, setSelectedEventModal] = useState<EventItem | null>(() => {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
@@ -48,12 +51,45 @@ export function App() {
     }
     return null;
   });
+
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState<boolean>(false);
   const [noticeEventName, setNoticeEventName] = useState<string | undefined>(undefined);
   const [isPosterModalOpen, setIsPosterModalOpen] = useState<boolean>(false);
   const [isEmergencyModalOpen, setIsEmergencyModalOpen] = useState<boolean>(false);
+  const [isCrewCustomizerOpen, setIsCrewCustomizerOpen] = useState<boolean>(false);
+
+  // HUD Mission Task Tracker States
+  const [hasViewedMissions, setHasViewedMissions] = useState<boolean>(false);
+  const [hasReadRules, setHasReadRules] = useState<boolean>(false);
+  const [hasClickedRegister, setHasClickedRegister] = useState<boolean>(false);
+
+  // Scroll observer to update task completions automatically
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + window.innerHeight * 0.6;
+      
+      const eventsEl = document.getElementById('events');
+      if (eventsEl && scrollPos >= eventsEl.offsetTop) {
+        setHasViewedMissions(true);
+      }
+
+      const rulesEl = document.getElementById('rules');
+      if (rulesEl && scrollPos >= rulesEl.offsetTop) {
+        setHasReadRules(true);
+      }
+
+      const registerEl = document.getElementById('register');
+      if (registerEl && scrollPos >= registerEl.offsetTop + 100) {
+        // user scrolled deep into registration terminal
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleIntroComplete = () => {
+    soundEngine.stopAmbient();
     setShowIntro(false);
   };
 
@@ -65,15 +101,22 @@ export function App() {
   const handleOpenRegisterNotice = (eventName?: string) => {
     setNoticeEventName(eventName);
     setIsNoticeModalOpen(true);
+    setHasClickedRegister(true);
   };
 
   const handleCardRegisterClick = (event: EventItem) => {
-    const targetUrl = event.registrationLink || eventConfig.googleFormUrl;
-    if (!targetUrl || targetUrl === 'YOUR_GOOGLE_FORM_LINK_HERE') {
+    setHasClickedRegister(true);
+    const targetUrl = event.registrationLink || eventConfig.registrationLink;
+    if (!targetUrl || targetUrl.includes('YOUR_GOOGLE_FORM')) {
       handleOpenRegisterNotice(event.name);
     } else {
       window.open(targetUrl, '_blank', 'noopener,noreferrer');
     }
+  };
+
+  const handleViewEventDetails = (event: EventItem) => {
+    setHasViewedMissions(true);
+    setSelectedEventModal(event);
   };
 
   return (
@@ -96,6 +139,7 @@ export function App() {
       <Navbar
         onOpenRegisterModal={() => handleOpenRegisterNotice()}
         onReplayIntro={handleReplayIntro}
+        onOpenEmergencyModal={() => setIsEmergencyModalOpen(true)}
       />
 
       {/* 5. CONFIGURABLE ANNOUNCEMENT BANNER */}
@@ -108,6 +152,7 @@ export function App() {
           onOpenPosterModal={() => setIsPosterModalOpen(true)}
           onOpenRegisterModal={() => handleOpenRegisterNotice()}
           onOpenEmergencyModal={() => setIsEmergencyModalOpen(true)}
+          onOpenCrewCustomizer={() => setIsCrewCustomizerOpen(true)}
         />
 
         {/* MISSION BRIEFING // CENTRAL AREA */}
@@ -115,7 +160,7 @@ export function App() {
 
         {/* TASK BOARD // CHOOSE YOUR MISSION */}
         <EventGrid
-          onViewDetails={(event) => setSelectedEventModal(event)}
+          onViewDetails={handleViewEventDetails}
           onRegisterClick={handleCardRegisterClick}
         />
 
@@ -128,7 +173,7 @@ export function App() {
         {/* MISSION REWARDS (AUTO-HIDES IF EMPTY) */}
         <PrizeSection />
 
-        {/* JOIN THE CREW // 4-STEP AMONG US TASK */}
+        {/* JOIN THE CREW // REGISTRATION TASK TERMINAL */}
         <RegistrationSection
           onOpenNoticeModal={() => handleOpenRegisterNotice()}
         />
@@ -137,14 +182,43 @@ export function App() {
         <ContactSection />
       </main>
 
-      {/* 7. FUTURISTIC LOBBY FOOTER */}
+      {/* 7. MISSION PROGRESS HUD (AMONG US STYLE TASK BAR) */}
+      <MissionProgressHUD
+        hasViewedMissions={hasViewedMissions}
+        hasReadRules={hasReadRules}
+        hasClickedRegister={hasClickedRegister}
+      />
+
+      {/* 8. FLOATING CREW SELECT BUTTON (BOTTOM RIGHT) */}
+      <div className="fixed bottom-4 right-4 z-30">
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => {
+            soundEngine.playBlip(750);
+            setIsCrewCustomizerOpen(true);
+          }}
+          className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-space-950/90 border border-cyan-400/50 text-cyan-300 font-orbitron text-xs font-bold tracking-wider backdrop-blur-xl shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:border-cyan-300 hover:text-white transition-all cursor-pointer group"
+          title="Customize Your Crewmate"
+          aria-label="Open Crew Select Customizer"
+        >
+          <img
+            src="/assets/theme_crewmates/crewmate_1.png"
+            alt="Crew Customizer"
+            className="w-5 h-5 object-contain group-hover:rotate-12 transition-transform"
+          />
+          <span className="hidden sm:inline">CREW SELECT</span>
+        </motion.button>
+      </div>
+
+      {/* 9. FUTURISTIC LOBBY FOOTER */}
       <Footer
         onReplayIntro={handleReplayIntro}
         onOpenPosterModal={() => setIsPosterModalOpen(true)}
         onOpenEmergencyModal={() => setIsEmergencyModalOpen(true)}
       />
 
-      {/* 8. MODALS & EASTER EGGS */}
+      {/* 10. MODALS & EASTER EGGS */}
       {/* Event Detail Modal */}
       <EventDetailModal
         event={selectedEventModal}
@@ -171,8 +245,27 @@ export function App() {
         onClose={() => setIsEmergencyModalOpen(false)}
       />
 
+      {/* Crew Customizer Modal */}
+      <AnimatePresence>
+        {isCrewCustomizerOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0"
+              onClick={() => setIsCrewCustomizerOpen(false)}
+            />
+            <div className="relative z-10 w-full max-w-sm">
+              <CrewCustomizer onClose={() => setIsCrewCustomizerOpen(false)} />
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }
 
 export default App;
+

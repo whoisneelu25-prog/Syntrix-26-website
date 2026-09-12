@@ -30,9 +30,9 @@ export const NeonButton: React.FC<NeonButtonProps> = ({
   ...props
 }) => {
   const sizeClasses = {
-    sm: 'px-3.5 py-1.5 text-xs tracking-wider gap-1.5 rounded-lg',
-    md: 'px-5 py-2.5 text-sm tracking-wide gap-2 rounded-xl',
-    lg: 'px-7 py-3.5 text-base tracking-widest font-bold gap-2.5 rounded-xl',
+    sm: 'px-4 py-2 text-xs tracking-wide gap-2 rounded-xl shrink-0',
+    md: 'px-5 py-2.5 text-sm tracking-wide gap-2 rounded-xl shrink-0',
+    lg: 'px-7 py-3.5 text-base tracking-widest font-bold gap-2.5 rounded-xl shrink-0',
   };
 
   const variantClasses = {
@@ -61,9 +61,9 @@ export const NeonButton: React.FC<NeonButtonProps> = ({
 
   const buttonContent = (
     <>
-      {icon && iconPosition === 'left' && <span className="inline-flex shrink-0">{icon}</span>}
-      <span className="relative z-10 whitespace-nowrap uppercase font-orbitron">{children}</span>
-      {icon && iconPosition === 'right' && <span className="inline-flex shrink-0">{icon}</span>}
+      {icon && iconPosition === 'left' && <span className="inline-flex items-center justify-center shrink-0">{icon}</span>}
+      <span className="relative z-10 whitespace-nowrap uppercase font-orbitron leading-none">{children}</span>
+      {icon && iconPosition === 'right' && <span className="inline-flex items-center justify-center shrink-0">{icon}</span>}
     </>
   );
 

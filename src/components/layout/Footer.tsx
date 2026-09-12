@@ -2,11 +2,12 @@ import React from 'react';
 import { eventConfig } from '../../config/eventConfig';
 import { soundEngine } from '../../lib/soundEffects';
 import { 
-  Rocket, 
   ArrowUp, 
   Sparkles, 
   Radio,
-  ShieldAlert
+  ShieldAlert,
+  Calendar,
+  MapPin
 } from 'lucide-react';
 
 interface FooterProps {
@@ -34,29 +35,42 @@ export const Footer: React.FC<FooterProps> = ({
           
           {/* BRAND COLUMN (5 COLS) */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-space-900 border border-cyan-400/50 flex items-center justify-center text-cyan-400">
-                <Rocket className="w-5 h-5" />
+            <div className="flex items-center gap-4">
+              <img 
+                src="/assets/syntrix_logo_official.png" 
+                alt="SYNTRIX'26 Official Logo"
+                className="h-12 w-auto object-contain drop-shadow-[0_0_20px_rgba(0,240,255,0.4)]"
+              />
+              <div>
+                <span className="font-orbitron font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-purple-400 block leading-tight">
+                  SYNTRIX'26
+                </span>
+                <span className="font-mono text-[10px] text-cyan-400 tracking-widest uppercase">
+                  DROPSHIP MISSION CENTRAL
+                </span>
               </div>
-              <span className="font-orbitron font-black text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-purple-400">
-                {eventConfig.eventName}
-              </span>
             </div>
 
-            <p className="font-space text-sm text-slate-300 max-w-sm leading-relaxed">
-              {eventConfig.eventTheme}
-            </p>
-
-            <div className="font-mono text-xs text-slate-400 space-y-1 pt-1">
-              <div className="text-white font-bold">{eventConfig.collegeName}</div>
-              <div>{eventConfig.collegeSubtitle}</div>
-              <div>{eventConfig.location}</div>
+            <div className="space-y-1 text-slate-300 font-space text-sm">
+              <p className="font-bold text-white tracking-wide">
+                PRATHYUSHA ENGINEERING COLLEGE
+              </p>
+              <p className="text-xs text-purple-300 tracking-wider">
+                Celebration of Software Freedom Day & International Innovation Day
+              </p>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-mono text-[11px]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>DROPSHIP LOBBY: ALL SYSTEMS NOMINAL</span>
+            <div className="flex flex-wrap gap-4 pt-1 font-mono text-xs text-cyan-300">
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-space-900 border border-cyan-500/30">
+                <Calendar className="w-3.5 h-3.5 text-cyan-400" />
+                <span>18 • 09 • 2026</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-space-900 border border-purple-500/30 text-purple-300">
+                <MapPin className="w-3.5 h-3.5 text-purple-400" />
+                <span>{eventConfig.venue}</span>
+              </div>
             </div>
+
           </div>
 
           {/* MISSIONS COLUMN (3 COLS) */}
@@ -126,11 +140,13 @@ export const Footer: React.FC<FooterProps> = ({
               )}
 
               <a
-                href="#register"
-                onClick={() => soundEngine.playBlip(700)}
+                href={eventConfig.registrationLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => soundEngine.playConfirm()}
                 className="w-full py-2 px-3 rounded-lg bg-cyan-950/50 border border-cyan-400/40 text-cyan-200 hover:text-white hover:border-cyan-300 text-xs font-mono flex items-center justify-between transition-colors block"
               >
-                <span>JOIN THE CREW (TASK)</span>
+                <span>JOIN THE CREW (GOOGLE FORM)</span>
                 <span className="text-[10px]">&gt;</span>
               </a>
             </div>
@@ -141,7 +157,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* BOTTOM STRIP */}
         <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-400">
           <div>
-            &copy; {eventConfig.eventEdition} {eventConfig.eventName}. {eventConfig.collegeName}. All rights reserved.
+            &copy; 2026 SYNTRIX'26. PRATHYUSHA ENGINEERING COLLEGE. All rights reserved.
           </div>
 
           <div className="flex items-center gap-4">
@@ -160,3 +176,4 @@ export const Footer: React.FC<FooterProps> = ({
     </footer>
   );
 };
+
