@@ -227,7 +227,7 @@ export const eventConfig: EventConfig = {
   coordinators: [
     {
       role: "EVENT COORDINATOR",
-      name: "Datshin KS",
+      name: "Datshin Kumar",
       phone: "7845390496",
       displayPhone: "7845390496"
     },
