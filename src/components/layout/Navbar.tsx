@@ -62,40 +62,47 @@ export const Navbar: React.FC<NavbarProps> = ({
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-space-950/90 backdrop-blur-md border-b border-cyan-500/25 py-2 shadow-[0_4px_30px_rgba(0,0,0,0.8)]'
-            : 'bg-transparent py-3'
+            ? 'bg-space-950/95 backdrop-blur-xl border-b border-cyan-500/30 py-2 shadow-[0_4px_30px_rgba(0,0,0,0.8)]'
+            : 'bg-space-950/80 backdrop-blur-md border-b border-cyan-500/15 py-2.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             
-            {/* BRAND LOGO (OFFICIAL POSTER ASSET) */}
+            {/* BRAND LOGO & DROPSHIP MISSION CENTRAL TELEMETRY */}
             <a
               href="#hero"
               onClick={() => soundEngine.playBlip(800)}
-              className="flex items-center gap-2 sm:gap-3 group"
-              aria-label="SYNTRIX'26 Home"
+              className="flex items-center gap-2.5 sm:gap-3 group shrink-0"
+              aria-label="SYNTRIX'26 Home - Dropship Mission Central"
             >
-              <div className="relative h-9 sm:h-10 w-auto flex items-center">
+              <div className="relative h-8 sm:h-9 md:h-10 w-auto flex items-center shrink-0">
                 <img
                   src="/assets/syntrix_logo_official.png"
                   alt="SYNTRIX'26"
-                  className="h-8 sm:h-9 w-auto object-contain drop-shadow-[0_0_12px_rgba(0,240,255,0.6)] group-hover:drop-shadow-[0_0_20px_rgba(0,240,255,0.9)] transition-all"
+                  className="h-7 sm:h-8 md:h-9 w-auto object-contain drop-shadow-[0_0_12px_rgba(0,240,255,0.6)] group-hover:drop-shadow-[0_0_20px_rgba(0,240,255,0.9)] transition-all"
                 />
               </div>
 
-              <div className="hidden sm:flex flex-col justify-center">
-                <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-cyan-950/70 text-cyan-300 border border-cyan-500/30 tracking-wider font-semibold w-fit">
-                  DROPSHIP MISSION CENTRAL
-                </span>
-                <p className="text-[8px] font-mono tracking-widest text-slate-400 uppercase mt-0.5">
+              {/* Vertical Sci-Fi Divider */}
+              <div className="hidden sm:block h-6 sm:h-7 w-[1px] bg-gradient-to-b from-transparent via-cyan-400/40 to-transparent shrink-0" />
+
+              {/* Mission Central & Tech Carnival Telemetry Info */}
+              <div className="hidden sm:flex flex-col justify-center shrink-0 text-left">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0 shadow-[0_0_6px_#00f0ff]" />
+                  <span className="font-orbitron text-[10px] sm:text-[11px] font-extrabold tracking-[0.12em] text-cyan-300 uppercase leading-none whitespace-nowrap group-hover:text-cyan-200 transition-colors">
+                    DROPSHIP MISSION CENTRAL
+                  </span>
+                </div>
+                <span className="font-mono text-[8px] sm:text-[9px] font-medium tracking-[0.2em] text-purple-300/85 uppercase leading-none mt-1 pl-3 whitespace-nowrap">
                   Tech Carnival 2026
-                </p>
+                </span>
               </div>
             </a>
 
-            {/* DESKTOP GAME NAV LINKS */}
-            <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 bg-space-950/70 backdrop-blur-md px-3 py-1 rounded-full border border-cyan-500/20 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+            {/* DESKTOP GAME NAV LINKS (Visible on lg+ for optimal breathing room) */}
+            <nav className="hidden lg:flex items-center space-x-1 lg:space-x-1.5 bg-space-950/70 backdrop-blur-md px-3 py-1 rounded-full border border-cyan-500/20 shadow-[0_0_15px_rgba(0,0,0,0.5)] shrink-0">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
@@ -109,9 +116,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             </nav>
 
             {/* RIGHT SIDE ACTIONS */}
-            <div className="flex items-center space-x-2 sm:space-x-3">
+            <div className="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
               {/* SYSTEM ONLINE BADGE */}
-              <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-space-900/80 border border-emerald-500/30 font-mono text-[10px] text-emerald-300">
+              <div className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-space-900/80 border border-emerald-500/30 font-mono text-[10px] text-emerald-300">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="tracking-widest">SYSTEM ONLINE</span>
               </div>
@@ -147,7 +154,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               {onReplayIntro && (
                 <button
                   onClick={onReplayIntro}
-                  className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-purple-500/30 bg-space-900/60 text-purple-300 hover:text-white hover:border-purple-400 text-xs font-mono transition-all"
+                  className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-purple-500/30 bg-space-900/60 text-purple-300 hover:text-white hover:border-purple-400 text-xs font-mono transition-all"
                   title="Replay Opening Cinematic"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-purple-400" />
@@ -160,16 +167,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                 variant="cyan"
                 size="sm"
                 onClick={handleRegisterClick}
-                className="hidden sm:inline-flex shrink-0 font-orbitron font-bold"
+                className="hidden sm:inline-flex shrink-0 font-orbitron font-bold text-xs"
                 icon={<UserPlus className="w-4 h-4" />}
               >
                 JOIN THE CREW
               </NeonButton>
 
-              {/* MOBILE HAMBURGER BUTTON */}
+              {/* MOBILE HAMBURGER BUTTON (Visible up to lg) */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-xl border border-cyan-500/30 bg-space-900/80 text-cyan-300 hover:text-white"
+                className="lg:hidden p-2 rounded-xl border border-cyan-500/30 bg-space-900/80 text-cyan-300 hover:text-white transition-colors"
                 aria-label="Open Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -185,17 +192,27 @@ export const Navbar: React.FC<NavbarProps> = ({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden border-b border-cyan-500/20 bg-space-950/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3"
+              className="lg:hidden border-b border-cyan-500/20 bg-space-950/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-3 shadow-2xl"
             >
+              {/* Mission Header inside drawer for mobile */}
+              <div className="flex items-center justify-between pb-2 border-b border-cyan-500/15 font-mono text-[10px]">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="font-orbitron font-bold text-cyan-300 tracking-wider">DROPSHIP MISSION CENTRAL</span>
+                </div>
+                <span className="text-purple-300/90 font-medium">Tech Carnival 2026</span>
+              </div>
+
               <div className="flex flex-col space-y-1">
                 {navLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
                     onClick={handleNavClick}
-                    className="px-4 py-2.5 rounded-lg font-orbitron text-xs font-bold tracking-wider text-slate-200 hover:text-cyan-300 hover:bg-space-900 border border-transparent hover:border-cyan-500/20"
+                    className="px-4 py-2.5 rounded-lg font-orbitron text-xs font-bold tracking-wider text-slate-200 hover:text-cyan-300 hover:bg-space-900 border border-transparent hover:border-cyan-500/20 transition-all flex items-center justify-between"
                   >
-                    {link.label}
+                    <span>{link.label}</span>
+                    <span className="text-cyan-500/50 font-mono text-[10px]">»</span>
                   </a>
                 ))}
               </div>
@@ -208,7 +225,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setMobileMenuOpen(false);
                     handleRegisterClick();
                   }}
-                  className="w-full"
+                  className="w-full font-orbitron font-bold"
+                  icon={<UserPlus className="w-4 h-4" />}
                 >
                   JOIN THE CREW
                 </NeonButton>
@@ -219,10 +237,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                       setMobileMenuOpen(false);
                       onReplayIntro();
                     }}
-                    className="w-full py-2 rounded-lg font-mono text-xs text-purple-300 border border-purple-500/30 hover:bg-purple-950/30 flex items-center justify-center gap-1.5"
+                    className="w-full py-2.5 rounded-lg font-mono text-xs text-purple-300 border border-purple-500/30 hover:bg-purple-950/30 flex items-center justify-center gap-1.5 transition-colors"
                   >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    REPLAY CINEMATIC INTRO
+                    <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+                    <span>REPLAY CINEMATIC INTRO</span>
                   </button>
                 )}
               </div>
