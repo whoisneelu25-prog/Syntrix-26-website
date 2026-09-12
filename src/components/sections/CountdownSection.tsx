@@ -77,27 +77,61 @@ export const CountdownSection: React.FC = () => {
           </p>
         </div>
 
-        {/* TIME UNITS READOUT OR STATUS BADGE */}
+        {/* TIME UNITS READOUT WITH CELEBRATING CREWMATES */}
         {missionState === 'UPCOMING' && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto relative z-10">
-            {timeUnits.map((unit) => (
-              <motion.div
-                key={unit.label}
-                whileHover={{ scale: 1.03 }}
-                className={`p-5 sm:p-6 rounded-2xl bg-space-950/80 border ${unit.border} backdrop-blur-md flex flex-col items-center justify-center shadow-lg relative group overflow-hidden`}
-              >
-                {/* Glow bar */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-70 group-hover:opacity-100 transition-opacity" />
+          <div className="relative max-w-5xl mx-auto">
+            {/* Left Flanking: Green Bat Crewmate */}
+            <motion.div
+              animate={{ y: [0, -12, 0], rotate: [-4, 4, -4] }}
+              transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
+              className="hidden xl:block absolute -left-16 top-1/2 -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <img
+                src="/assets/carnival_crew/crew_bat_green.png"
+                alt="Bat Wing Crewmate"
+                className="w-20 2xl:w-24 h-auto object-contain filter drop-shadow-[0_0_20px_rgba(34,197,94,0.6)]"
+              />
+              <div className="mt-1 px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-400 text-[8px] font-mono text-emerald-300 uppercase tracking-wider backdrop-blur-md">
+                COUNTDOWN ⏳
+              </div>
+            </motion.div>
 
-                <span className={`font-orbitron text-4xl sm:text-6xl font-black ${unit.color} text-glow-cyan tracking-tight`}>
-                  {String(unit.value).padStart(2, '0')}
-                </span>
+            {/* Right Flanking: Blue Party Crewmate */}
+            <motion.div
+              animate={{ y: [0, -12, 0], rotate: [4, -4, 4] }}
+              transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+              className="hidden xl:block absolute -right-16 top-1/2 -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <img
+                src="/assets/carnival_crew/crew_party_blue.png"
+                alt="Party Hat Crewmate"
+                className="w-20 2xl:w-24 h-auto object-contain filter drop-shadow-[0_0_20px_rgba(59,130,246,0.6)]"
+              />
+              <div className="mt-1 px-2 py-0.5 rounded-full bg-blue-950/90 border border-blue-400 text-[8px] font-mono text-blue-300 uppercase tracking-wider backdrop-blur-md">
+                READY TO LAUNCH 🚀
+              </div>
+            </motion.div>
 
-                <span className="font-mono text-xs sm:text-sm tracking-widest uppercase text-slate-400 mt-2 font-bold">
-                  {unit.label}
-                </span>
-              </motion.div>
-            ))}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto relative z-10">
+              {timeUnits.map((unit) => (
+                <motion.div
+                  key={unit.label}
+                  whileHover={{ scale: 1.03 }}
+                  className={`p-5 sm:p-6 rounded-2xl bg-space-950/80 border ${unit.border} backdrop-blur-md flex flex-col items-center justify-center shadow-lg relative group overflow-hidden`}
+                >
+                  {/* Glow bar */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 opacity-70 group-hover:opacity-100 transition-opacity" />
+
+                  <span className={`font-orbitron text-4xl sm:text-6xl font-black ${unit.color} text-glow-cyan tracking-tight`}>
+                    {String(unit.value).padStart(2, '0')}
+                  </span>
+
+                  <span className="font-mono text-xs sm:text-sm tracking-widest uppercase text-slate-400 mt-2 font-bold">
+                    {unit.label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
           </div>
         )}
 

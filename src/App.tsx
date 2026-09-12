@@ -15,6 +15,7 @@ import { Navbar } from './components/layout/Navbar';
 import { AnnouncementBanner } from './components/sections/AnnouncementBanner';
 import { HeroSection } from './components/sections/HeroSection';
 import { MissionBriefing } from './components/sections/MissionBriefing';
+import { ImpostorKillCorridor } from './components/sections/ImpostorKillCorridor';
 import { EventGrid } from './components/sections/EventGrid';
 import { EventDetailModal } from './components/sections/EventDetailModal';
 import { RulesSection } from './components/sections/RulesSection';
@@ -124,6 +125,9 @@ export function App() {
 
         {/* MISSION BRIEFING // CENTRAL AREA */}
         <MissionBriefing />
+
+        {/* SCROLL-DRIVEN IMPOSTOR ATTACK // ELECTRICAL CORRIDOR */}
+        <ImpostorKillCorridor onEmergencyReport={() => setIsEmergencyModalOpen(true)} />
 
         {/* TASK BOARD // CHOOSE YOUR MISSION */}
         <EventGrid

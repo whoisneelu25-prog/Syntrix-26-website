@@ -41,8 +41,24 @@ export const RulesSection: React.FC = () => {
     <section id="rulebook" className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
       <div className="space-y-10">
         
-        {/* SECTION HEADER */}
-        <div className="text-center space-y-3">
+        {/* SECTION HEADER WITH CODEX WIZARD CREWMATE */}
+        <div className="relative text-center space-y-3">
+          {/* Floating Wizard Codex Guardian */}
+          <motion.div
+            animate={{ y: [0, -7, 0], rotate: [-2, 2, -2] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+            className="hidden sm:block absolute -top-8 right-2 md:right-8 z-10 pointer-events-none"
+          >
+            <img
+              src="/assets/carnival_crew/crew_wizard_blue.png"
+              alt="Codex Wizard Crewmate"
+              className="w-18 md:w-22 h-auto object-contain filter drop-shadow-[0_0_18px_rgba(59,130,246,0.6)]"
+            />
+            <div className="mt-1 px-2 py-0.5 rounded-full bg-blue-950/90 border border-blue-400 text-[8px] font-mono text-blue-300 uppercase tracking-wider backdrop-blur-md">
+              CODEX MASTER 📜
+            </div>
+          </motion.div>
+
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 font-mono text-xs tracking-widest uppercase">
             <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
             STANDARD OPERATING PROCEDURES // CODEX

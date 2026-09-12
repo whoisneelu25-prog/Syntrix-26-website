@@ -144,8 +144,9 @@ export const MissionBriefing: React.FC = () => {
                   <span className="font-mono text-[10px] text-slate-500">SYSTEM ID: PEC-SYNTRIX</span>
                 </div>
 
-                {/* Animated Crewmate at Work */}
-                <div className="py-4 flex items-center justify-center">
+                {/* Animated Crewmates at Work (Duo) */}
+                <div className="py-4 flex items-center justify-center gap-4 sm:gap-8">
+                  {/* Primary Cyan Crewmate */}
                   <motion.div
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -154,11 +155,28 @@ export const MissionBriefing: React.FC = () => {
                     <img
                       src="/assets/theme_crewmates/crewmate_1.png"
                       alt="Crewmate Working at Terminal"
-                      className="w-24 sm:w-28 h-auto object-contain filter drop-shadow-[0_0_15px_rgba(0,240,255,0.5)]"
+                      className="w-20 sm:w-24 h-auto object-contain filter drop-shadow-[0_0_15px_rgba(0,240,255,0.5)]"
                     />
-                    <div className="w-20 h-3 bg-black/80 rounded-full blur-[2px] mt-1" />
-                    <div className="absolute -top-3 -right-2 px-2 py-0.5 rounded bg-cyan-950/90 border border-cyan-400 text-[10px] font-mono text-cyan-300 animate-pulse">
-                      STATUS: ONLINE 💻
+                    <div className="w-16 h-2.5 bg-black/80 rounded-full blur-[2px] mt-1" />
+                    <div className="absolute -top-3 -right-2 px-2 py-0.5 rounded bg-cyan-950/90 border border-cyan-400 text-[9px] font-mono text-cyan-300 animate-pulse whitespace-nowrap">
+                      ONLINE 💻
+                    </div>
+                  </motion.div>
+
+                  {/* Halloween Cat Crewmate Companion */}
+                  <motion.div
+                    animate={{ y: [-4, 2, -4], rotate: [-2, 2, -2] }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                    className="relative flex flex-col items-center"
+                  >
+                    <img
+                      src="/assets/carnival_crew/crew_cat_orange.png"
+                      alt="Cat Crewmate Companion"
+                      className="w-20 sm:w-24 h-auto object-contain filter drop-shadow-[0_0_15px_rgba(251,146,60,0.5)]"
+                    />
+                    <div className="w-16 h-2.5 bg-black/80 rounded-full blur-[2px] mt-1" />
+                    <div className="absolute -top-3 -left-2 px-2 py-0.5 rounded bg-amber-950/90 border border-amber-400 text-[9px] font-mono text-amber-300 whitespace-nowrap">
+                      ASSISTING 🐱
                     </div>
                   </motion.div>
                 </div>
