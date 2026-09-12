@@ -84,12 +84,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 />
               </div>
 
-              <div className="hidden sm:block">
-                <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-cyan-950/70 text-cyan-300 border border-cyan-500/30">
-                  LOBBY
+              <div className="hidden sm:flex flex-col justify-center">
+                <span className="font-mono text-[9px] px-1.5 py-0.5 rounded bg-cyan-950/70 text-cyan-300 border border-cyan-500/30 tracking-wider font-semibold w-fit">
+                  DROPSHIP MISSION CENTRAL
                 </span>
-                <p className="text-[8px] font-mono tracking-widest text-slate-400 uppercase">
-                  PRATHYUSHA ENG COLLEGE
+                <p className="text-[8px] font-mono tracking-widest text-slate-400 uppercase mt-0.5">
+                  Tech Carnival 2026
                 </p>
               </div>
             </a>
