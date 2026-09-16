@@ -77,9 +77,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         className="hidden lg:flex absolute right-8 xl:right-16 top-1/3 -translate-y-1/2 flex-col items-center pointer-events-none z-10"
       >
         <img
-          src="/assets/carnival_crew/crew_ghost_white.png"
+          src="/assets/theme_crewmates/crewmate_6.png"
           alt="Flight Navigator"
-          className="w-24 2xl:w-28 h-auto object-contain"
+          className="w-24 2xl:w-28 h-auto object-contain filter drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]"
         />
         <div className="mt-1 px-2.5 py-0.5 rounded-full bg-space-950/90 border border-purple-400/50 text-[9px] font-mono text-purple-300 text-center uppercase tracking-wider backdrop-blur-md">
           NAVIGATOR
