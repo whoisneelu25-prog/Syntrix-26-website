@@ -95,8 +95,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                     DROPSHIP MISSION CENTRAL
                   </span>
                 </div>
-                <span className="font-mono text-[8px] sm:text-[9px] font-medium tracking-[0.2em] text-purple-300/85 uppercase leading-none mt-1 pl-3 whitespace-nowrap">
-                  Tech Carnival 2026
+                <span className="font-mono text-[8px] sm:text-[9px] font-medium tracking-[0.15em] text-purple-300/90 uppercase leading-none mt-1 pl-3 whitespace-nowrap">
+                  DEPT OF ARTIFICIAL INTELLIGENCE &amp; DATA SCIENCE
                 </span>
               </div>
             </a>
@@ -200,7 +200,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                   <span className="font-orbitron font-bold text-cyan-300 tracking-wider">DROPSHIP MISSION CENTRAL</span>
                 </div>
-                <span className="text-purple-300/90 font-medium">Tech Carnival 2026</span>
+                <span className="text-purple-300/90 font-medium">Dept of AI &amp; DS</span>
               </div>
 
               <div className="flex flex-col space-y-1">

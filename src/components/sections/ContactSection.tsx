@@ -121,11 +121,14 @@ export const ContactSection: React.FC = () => {
               <h4 className="font-orbitron text-lg sm:text-xl font-bold text-white">
                 {eventConfig.collegeName}
               </h4>
+              <p className="font-orbitron text-xs sm:text-sm text-cyan-300 font-bold tracking-wider uppercase mt-1">
+                {eventConfig.departmentName}
+              </p>
               <p className="font-space text-xs text-purple-300 font-semibold tracking-wider uppercase mt-0.5">
                 {eventConfig.collegeSubtitle}
               </p>
               <p className="font-space text-sm text-slate-300 mt-1">
-                {eventConfig.location} • AI&DS Block Complex
+                {eventConfig.location} • AI&amp;DS Block Complex
               </p>
             </div>
           </div>

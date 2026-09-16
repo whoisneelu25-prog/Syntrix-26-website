@@ -122,13 +122,17 @@ export const EventCard: React.FC<EventCardProps> = ({
 
       {/* TOP HEADER: BADGE & CREWMATE AVATAR */}
       <div>
-        <div className="flex items-center justify-between gap-3 mb-4">
-          <div className="flex items-center gap-2">
-            <span className={`px-2.5 py-1 rounded-md font-mono text-[10px] tracking-wider uppercase font-bold border ${theme.badgeBg}`}>
-              {event.category}
+        <div className="flex items-center justify-between gap-2 mb-4">
+          <div className="flex items-center flex-wrap gap-1.5">
+            <span className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold tracking-wider uppercase border ${
+              event.phase === 'Phase 1'
+                ? 'bg-cyan-950/90 border-cyan-400/60 text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.25)]'
+                : 'bg-purple-950/90 border-purple-400/60 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.25)]'
+            }`}>
+              {event.phase}
             </span>
-            <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest hidden sm:inline">
-              {event.badge}
+            <span className={`px-2 py-0.5 rounded font-mono text-[10px] tracking-wider uppercase font-bold border ${theme.badgeBg}`}>
+              {event.category}
             </span>
           </div>
 

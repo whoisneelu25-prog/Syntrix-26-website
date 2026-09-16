@@ -55,8 +55,11 @@ export const Footer: React.FC<FooterProps> = ({
               <p className="font-bold text-white tracking-wide">
                 PRATHYUSHA ENGINEERING COLLEGE
               </p>
+              <p className="font-orbitron text-xs text-cyan-300 font-bold tracking-wider uppercase">
+                {eventConfig.departmentName}
+              </p>
               <p className="text-xs text-purple-300 tracking-wider">
-                Celebration of Software Freedom Day & International Innovation Day
+                Celebration of Software Freedom Day &amp; International Innovation Day
               </p>
             </div>
 
@@ -84,10 +87,15 @@ export const Footer: React.FC<FooterProps> = ({
                   <a
                     href="#events"
                     onClick={() => soundEngine.playBlip(700)}
-                    className="hover:text-cyan-300 transition-colors flex items-center gap-1.5"
+                    className="hover:text-cyan-300 transition-colors flex items-center justify-between gap-1.5"
                   >
-                    <span className="text-cyan-500">&gt;</span>
-                    <span>{e.name}</span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="text-cyan-500">&gt;</span>
+                      <span>{e.name}</span>
+                    </span>
+                    <span className="text-[9px] text-cyan-300/80 bg-space-900 border border-cyan-500/30 px-1.5 py-0.5 rounded font-bold">
+                      {e.phase}
+                    </span>
                   </a>
                 </li>
               ))}
@@ -157,7 +165,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* BOTTOM STRIP */}
         <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-400">
           <div>
-            &copy; 2026 SYNTRIX'26. PRATHYUSHA ENGINEERING COLLEGE. All rights reserved.
+            &copy; 2026 SYNTRIX'26. Department of Artificial Intelligence &amp; Data Science, PRATHYUSHA ENGINEERING COLLEGE.
           </div>
 
           <div className="flex items-center gap-4">

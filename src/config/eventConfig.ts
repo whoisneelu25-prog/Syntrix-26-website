@@ -7,6 +7,9 @@ export interface EventItem {
   id: string;
   name: string;
   category: 'Technical' | 'Non-Technical';
+  phase: 'Phase 1' | 'Phase 2';
+  phaseNumber: 1 | 2;
+  phaseTrack?: string;
   subtitle: string;
   shortDescription: string;
   fullDescription: string;
@@ -50,6 +53,9 @@ export interface PrizeItem {
 export interface EventConfig {
   collegeName: string;
   collegeSubtitle: string;
+  departmentName: string;
+  departmentTitle: string;
+  departmentShort: string;
   location: string;
   collegeCoords: {
     lat: string;
@@ -84,6 +90,9 @@ export const OFFICIAL_REGISTRATION_URL = "https://docs.google.com/forms/d/e/1FAI
 export const eventConfig: EventConfig = {
   collegeName: "PRATHYUSHA ENGINEERING COLLEGE",
   collegeSubtitle: "(AN AUTONOMOUS INSTITUTION)",
+  departmentName: "DEPARTMENT OF ARTIFICIAL INTELLIGENCE AND DATA SCIENCE",
+  departmentTitle: "Department of Artificial Intelligence and Data Science",
+  departmentShort: "AI & DS",
   location: "ARANVOYAL KUPPAM, TIRUVALLUR",
   collegeCoords: {
     lat: "13.0827° N",
@@ -108,7 +117,7 @@ export const eventConfig: EventConfig = {
 
   announcement: {
     enabled: true,
-    message: "MISSION DETECTED: SYNTRIX'26 REGISTRATION CONSOLE IS ONLINE",
+    message: "MISSION DETECTED: SYNTRIX'26 REGISTRATION CONSOLE IS ONLINE // PHASE 1 & PHASE 2 ACTIVE",
     badgeText: "TRANSMISSION LIVE",
     actionText: "ENTER THE MISSION",
     actionUrl: "#events"
@@ -116,64 +125,18 @@ export const eventConfig: EventConfig = {
 
   events: [
     {
-      id: "ai-case-file",
-      name: "AI CASE FILE",
-      category: "Technical",
-      subtitle: "AI-Based Mystery & Investigation",
-      tagline: "ANALYZE. SOLVE. UNLOCK.",
-      shortDescription: "Solve the digital anomaly using clues and evidence provided under timed conditions.",
-      fullDescription: "AI CASE FILE is an intense cyber-investigation challenge. A suspicious anomaly threatens the dropship mission telemetry. Your team must inspect the clues and evidence provided, identify the root cause, and submit the final forensic verdict with solid reasoning.",
-      iconName: "BrainCircuit",
-      badge: "MISSION: FORENSICS",
-      round: "Single Round",
-      teamSize: "2–3 members",
-      duration: "65 mins",
-      venue: "AI&DS Block",
-      rules: [
-        "Solve the case using the clues and evidence provided.",
-        "Use only the materials given during the event.",
-        "Mobile phones, internet, AI tools, and outside help are not allowed.",
-        "Submit the final answer with brief reasoning/evidence.",
-        "Sharing answers or clues with other teams is prohibited.",
-        "Fastest valid submission wins in case of a tie.",
-        "Malpractice leads to disqualification."
-      ],
-      registrationLink: OFFICIAL_REGISTRATION_URL
-    },
-    {
-      id: "promptcraft",
-      name: "PROMPT CRAFT",
-      category: "Technical",
-      subtitle: "AI Prompt Engineering Challenge",
-      tagline: "IDEAS IN. INNOVATION OUT.",
-      shortDescription: "Formulate high-precision AI prompts to generate targeted outputs with zero manual post-editing.",
-      fullDescription: "PROMPT CRAFT puts your AI prompt orchestration skills to the test. Formulate powerful, creative, and strictly constrained prompts to guide models to target results accurately and creatively without manual modifications.",
-      iconName: "Terminal",
-      badge: "MISSION: GEN-AI",
-      round: "Single Round",
-      teamSize: "2 members (Duo)",
-      duration: "65 mins",
-      venue: "AI&DS Block",
-      rules: [
-        "Create effective prompts based on the given task.",
-        "Submit the final prompt along with its generated output.",
-        "No manual editing of the generated output.",
-        "Copying another team's prompt/output is prohibited.",
-        "Evaluation: Prompt Quality + Accuracy + Creativity + Output Quality.",
-        "Malpractice or violation of the rules leads to disqualification."
-      ],
-      registrationLink: OFFICIAL_REGISTRATION_URL
-    },
-    {
       id: "paper-404",
       name: "PAPER 404",
       category: "Technical",
+      phase: "Phase 1",
+      phaseNumber: 1,
+      phaseTrack: "PHASE 1 // RESEARCH & PRESENTATION",
       subtitle: "Technical Presentation Challenge",
       tagline: "DECODE IDEAS. REWRITE POSSIBILITIES.",
       shortDescription: "Deliver an original, high-impact technical presentation on the announced domain.",
-      fullDescription: "PAPER 404 is the premier technical symposium of SYNTRIX'26. Teams deliver an original, plagiarism-free technical presentation demonstrating sound technical knowledge, innovation, and relevance.",
+      fullDescription: "PAPER 404 is the premier technical symposium track of SYNTRIX'26 Phase 1. Teams deliver an original, plagiarism-free technical presentation demonstrating sound technical knowledge, innovation, and relevance.",
       iconName: "FileCode2",
-      badge: "MISSION: RESEARCH",
+      badge: "PHASE 1: RESEARCH",
       round: "Single Round",
       teamSize: "2–3 members",
       duration: "4 mins per team",
@@ -192,10 +155,13 @@ export const eventConfig: EventConfig = {
       id: "crazy-startup",
       name: "CRAZY PITCH",
       category: "Non-Technical",
+      phase: "Phase 1",
+      phaseNumber: 1,
+      phaseTrack: "PHASE 1 // RAPID IDEATION & PITCH",
       subtitle: "On-the-Spot Startup Pitch",
       tagline: "BOLD IDEAS. BIGGER IMPACT.",
       shortDescription: "Take a completely random, absurd topic on the spot and pitch it like the next billion-dollar unicorn.",
-      fullDescription: "CRAZY PITCH is an adrenaline-charged ideation challenge. You will receive an unexpected, absurd topic on the spot. Your mission: turn it into a crazy startup concept and pitch it like it is the next billion-dollar company.",
+      fullDescription: "CRAZY PITCH is an adrenaline-charged Phase 1 ideation challenge. You will receive an unexpected, absurd topic on the spot. Your mission: turn it into a crazy startup concept and pitch it like it is the next billion-dollar company.",
       concept: "Take a completely random topic and turn it into a crazy startup idea. Pitch it like it is the next billion-dollar company.",
       animatedTagline: "MAKE THE IMPOSSIBLE SOUND INVESTABLE.",
       topic: "A RANDOM, ABSURD OR UNEXPECTED TOPIC WILL BE GIVEN ON THE SPOT.",
@@ -207,7 +173,7 @@ export const eventConfig: EventConfig = {
         "A startup for people who hate weekends."
       ],
       iconName: "Rocket",
-      badge: "MISSION: INNOVATION",
+      badge: "PHASE 1: INNOVATION",
       round: "Single Round",
       teamSize: "2 members (Duo)",
       duration: "5 mins",
@@ -216,6 +182,61 @@ export const eventConfig: EventConfig = {
         "No mobile phones, laptops, internet, PPT, or AI tools.",
         "Be creative, crazy, funny, or completely absurd.",
         "Offensive or inappropriate content is not allowed.",
+        "Malpractice leads to disqualification."
+      ],
+      registrationLink: OFFICIAL_REGISTRATION_URL
+    },
+    {
+      id: "promptcraft",
+      name: "PROMPT CRAFT",
+      category: "Technical",
+      phase: "Phase 2",
+      phaseNumber: 2,
+      phaseTrack: "PHASE 2 // GENERATIVE PROMPT CRAFT",
+      subtitle: "AI Prompt Engineering Challenge",
+      tagline: "IDEAS IN. INNOVATION OUT.",
+      shortDescription: "Formulate high-precision AI prompts to generate targeted outputs with zero manual post-editing.",
+      fullDescription: "PROMPT CRAFT puts your AI prompt orchestration skills to the test in Phase 2. Formulate powerful, creative, and strictly constrained prompts to guide models to target results accurately and creatively without manual modifications.",
+      iconName: "Terminal",
+      badge: "PHASE 2: GEN-AI",
+      round: "Single Round",
+      teamSize: "2 members (Duo)",
+      duration: "65 mins",
+      venue: "AI&DS Block",
+      rules: [
+        "Create effective prompts based on the given task.",
+        "Submit the final prompt along with its generated output.",
+        "No manual editing of the generated output.",
+        "Copying another team's prompt/output is prohibited.",
+        "Evaluation: Prompt Quality + Accuracy + Creativity + Output Quality.",
+        "Malpractice or violation of the rules leads to disqualification."
+      ],
+      registrationLink: OFFICIAL_REGISTRATION_URL
+    },
+    {
+      id: "ai-case-file",
+      name: "AI CASE FILE",
+      category: "Technical",
+      phase: "Phase 2",
+      phaseNumber: 2,
+      phaseTrack: "PHASE 2 // CYBER FORENSICS",
+      subtitle: "AI-Based Mystery & Investigation",
+      tagline: "ANALYZE. SOLVE. UNLOCK.",
+      shortDescription: "Solve the digital anomaly using clues and evidence provided under timed conditions.",
+      fullDescription: "AI CASE FILE is an intense Phase 2 cyber-investigation challenge. A suspicious anomaly threatens the dropship mission telemetry. Your team must inspect the clues and evidence provided, identify the root cause, and submit the final forensic verdict with solid reasoning.",
+      iconName: "BrainCircuit",
+      badge: "PHASE 2: FORENSICS",
+      round: "Single Round",
+      teamSize: "2–3 members",
+      duration: "65 mins",
+      venue: "AI&DS Block",
+      rules: [
+        "Solve the case using the clues and evidence provided.",
+        "Use only the materials given during the event.",
+        "Mobile phones, internet, AI tools, and outside help are not allowed.",
+        "Submit the final answer with brief reasoning/evidence.",
+        "Sharing answers or clues with other teams is prohibited.",
+        "Fastest valid submission wins in case of a tie.",
         "Malpractice leads to disqualification."
       ],
       registrationLink: OFFICIAL_REGISTRATION_URL

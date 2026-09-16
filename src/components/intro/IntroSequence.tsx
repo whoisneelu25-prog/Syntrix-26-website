@@ -469,16 +469,21 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="relative z-40 flex flex-col items-center justify-center text-center px-4 max-w-3xl"
           >
-            {/* College Autonomous Seal Badge */}
+            {/* College & Department Autonomous Seal Badge */}
             <motion.div
               initial={{ y: -15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.15 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/50 bg-space-900/90 backdrop-blur-md text-[11px] sm:text-xs font-cinzel font-bold tracking-widest text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.3)] mb-3"
+              className="inline-flex flex-col items-center gap-1 px-5 py-2 rounded-2xl border border-purple-500/50 bg-space-900/90 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.3)] mb-3"
             >
-              <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-              <span>PRATHYUSHA ENGINEERING COLLEGE</span>
-              <span className="text-cyan-300 font-chakra">(AUTONOMOUS)</span>
+              <div className="flex items-center gap-2 text-[11px] sm:text-xs font-cinzel font-bold tracking-widest text-purple-200">
+                <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+                <span>PRATHYUSHA ENGINEERING COLLEGE</span>
+                <span className="text-cyan-300 font-chakra">(AUTONOMOUS)</span>
+              </div>
+              <span className="font-orbitron text-[9px] sm:text-[10px] text-cyan-300 font-bold tracking-wider uppercase">
+                DEPARTMENT OF ARTIFICIAL INTELLIGENCE &amp; DATA SCIENCE
+              </span>
             </motion.div>
 
             {/* SYNTRIX'26 GRAND TITLE */}

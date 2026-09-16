@@ -86,11 +86,23 @@ export const MissionBriefing: React.FC = () => {
 
                 <div className="space-y-3 text-slate-300 text-sm sm:text-base leading-relaxed">
                   <p>
-                    In celebration of <strong className="text-cyan-300 font-medium">Software Freedom Day</strong> &amp; <strong className="text-purple-300 font-medium">International Innovation Day</strong>, <span className="text-white font-semibold">Prathyusha Engineering College</span> opens the dropship lobby for <span className="text-cyan-400 font-orbitron font-bold">SYNTRIX'26</span>.
+                    In celebration of <strong className="text-cyan-300 font-medium">Software Freedom Day</strong> &amp; <strong className="text-purple-300 font-medium">International Innovation Day</strong>, the <strong className="text-cyan-300 font-semibold">{eventConfig.departmentTitle}</strong> at <span className="text-white font-semibold">Prathyusha Engineering College</span> opens the dropship lobby for <span className="text-cyan-400 font-orbitron font-bold">SYNTRIX'26</span>.
                   </p>
                   <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-mono">
-                    Engage in forensic cyber puzzles in <strong className="text-cyan-300">AI CASE FILE</strong>, orchestrate generative intelligence in <strong className="text-cyan-300">PROMPT CRAFT</strong>, unveil original research in <strong className="text-purple-300">PAPER 404</strong>, or pitch bold on-the-spot concepts in <strong className="text-pink-300">CRAZY PITCH</strong>.
+                    The championship unfolds across two distinct operational tracks:
                   </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs pt-1">
+                    <div className="p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-500/30">
+                      <span className="text-cyan-400 font-bold uppercase block text-[10px] tracking-wider mb-0.5">PHASE 1 TRACK</span>
+                      <span className="text-white font-semibold block text-xs">PAPER 404 &bull; CRAZY PITCH</span>
+                      <span className="text-[10px] text-slate-400">Research Presentation &amp; Startup Pitch</span>
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-purple-950/40 border border-purple-500/30">
+                      <span className="text-purple-400 font-bold uppercase block text-[10px] tracking-wider mb-0.5">PHASE 2 TRACK</span>
+                      <span className="text-white font-semibold block text-xs">PROMPT CRAFT &bull; AI CASE FILE</span>
+                      <span className="text-[10px] text-slate-400">Prompt Engineering &amp; Cyber Mystery</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* MISSION OBJECTIVES */}

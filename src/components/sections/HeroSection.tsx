@@ -10,7 +10,8 @@ import {
   Layers, 
   Sparkles, 
   ShieldCheck, 
-  ShieldAlert 
+  ShieldAlert,
+  Cpu 
 } from 'lucide-react';
 import { soundEngine } from '../../lib/soundEffects';
 
@@ -45,38 +46,38 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           rotate: [-4, 4, -4],
         }}
         transition={{
-          duration: 5.5,
+          duration: 5,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="hidden xl:block absolute right-8 2xl:right-16 top-1/3 z-20 pointer-events-none opacity-85 filter drop-shadow-[0_0_20px_rgba(236,72,153,0.5)]"
+        className="hidden lg:flex absolute left-8 xl:left-16 top-1/3 -translate-y-1/2 flex-col items-center pointer-events-none z-10"
       >
         <img
-          src="/assets/theme_crewmates/crewmate_9.png"
-          alt="Cosmic Crewmate"
-          className="w-24 2xl:w-28 h-auto object-contain"
+          src="/assets/theme_crewmates/crewmate_1.png"
+          alt="Floating Cyan Crewmate"
+          className="w-24 2xl:w-28 h-auto object-contain filter drop-shadow-[0_0_20px_rgba(0,240,255,0.4)]"
         />
-        <div className="mt-1 px-2.5 py-0.5 rounded-full bg-space-950/90 border border-pink-400/50 text-[9px] font-mono text-pink-300 text-center uppercase tracking-wider backdrop-blur-md">
-          CREW #09
+        <div className="mt-1 px-2.5 py-0.5 rounded-full bg-space-950/90 border border-cyan-400/50 text-[9px] font-mono text-cyan-300 text-center uppercase tracking-wider backdrop-blur-md">
+          ZERO-G SPECIALIST
         </div>
       </motion.div>
 
-      {/* LEFT SIDE SUBTLE ASTRONAUT CREWMATE */}
+      {/* RIGHT CREWMATE ORBITING */}
       <motion.div
         animate={{
-          y: [0, 15, 0],
+          y: [0, 16, 0],
           rotate: [3, -3, 3],
         }}
         transition={{
-          duration: 6.2,
+          duration: 5.5,
           repeat: Infinity,
           ease: 'easeInOut',
-          delay: 1.2,
+          delay: 0.8,
         }}
-        className="hidden xl:block absolute left-8 2xl:left-16 top-2/5 z-20 pointer-events-none opacity-85 filter drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]"
+        className="hidden lg:flex absolute right-8 xl:right-16 top-1/3 -translate-y-1/2 flex-col items-center pointer-events-none z-10"
       >
         <img
-          src="/assets/theme_crewmates/crewmate_6.png"
+          src="/assets/carnival_crew/crew_ghost_white.png"
           alt="Flight Navigator"
           className="w-24 2xl:w-28 h-auto object-contain"
         />
@@ -92,8 +93,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-center space-y-6"
         >
-          {/* INSTITUTION STATUS BADGE (MATCHING POSTER HEADER) */}
-          <div className="inline-flex flex-col items-center gap-1 px-5 py-2 rounded-2xl bg-space-950/90 border border-cyan-400/40 backdrop-blur-md shadow-[0_0_25px_rgba(0,240,255,0.2)]">
+          {/* INSTITUTION & DEPARTMENT STATUS BADGE */}
+          <div className="inline-flex flex-col items-center gap-1.5 px-6 py-2.5 rounded-2xl bg-space-950/90 border border-cyan-400/40 backdrop-blur-md shadow-[0_0_25px_rgba(0,240,255,0.2)]">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-cyan-400" />
               <span className="font-cinzel text-xs sm:text-sm md:text-base font-bold tracking-widest text-cyan-100 uppercase">
@@ -104,6 +105,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <span>{eventConfig.collegeSubtitle}</span>
               <span className="text-cyan-400">•</span>
               <span>{eventConfig.location}</span>
+            </div>
+            {/* DEPARTMENT BADGE */}
+            <div className="pt-1.5 mt-0.5 border-t border-cyan-500/20 w-full flex items-center justify-center gap-2">
+              <Cpu className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+              <span className="font-orbitron text-[11px] sm:text-xs md:text-sm font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-white to-purple-300 uppercase">
+                {eventConfig.departmentName}
+              </span>
             </div>
           </div>
 
@@ -143,6 +151,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <p className="font-rajdhani text-sm sm:text-lg lg:text-xl text-purple-200 font-bold tracking-[0.18em] uppercase leading-snug">
               INTERNATIONAL INNOVATION DAY
             </p>
+          </div>
+
+          {/* TWO-PHASE MISSION PROTOCOL STRIP */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto text-left font-mono">
+            <div className="p-3.5 rounded-2xl bg-space-950/90 border border-cyan-500/40 backdrop-blur-md shadow-hud-card">
+              <div className="flex items-center justify-between text-cyan-400 text-[10px] font-bold uppercase tracking-widest mb-1.5">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  PHASE 1
+                </span>
+                <span className="px-2 py-0.5 rounded-md bg-cyan-950/80 border border-cyan-400/40 text-[9px] text-cyan-300">2 MISSIONS</span>
+              </div>
+              <p className="font-orbitron text-xs sm:text-sm font-black text-white tracking-wide">
+                PAPER 404 <span className="text-cyan-400 font-normal">•</span> CRAZY PITCH
+              </p>
+              <span className="block text-[10px] text-slate-400 mt-1">Presentation &amp; Rapid Startup Pitch</span>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-space-950/90 border border-purple-500/40 backdrop-blur-md shadow-hud-card">
+              <div className="flex items-center justify-between text-purple-400 text-[10px] font-bold uppercase tracking-widest mb-1.5">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                  PHASE 2
+                </span>
+                <span className="px-2 py-0.5 rounded-md bg-purple-950/80 border border-purple-400/40 text-[9px] text-purple-300">2 MISSIONS</span>
+              </div>
+              <p className="font-orbitron text-xs sm:text-sm font-black text-white tracking-wide">
+                PROMPT CRAFT <span className="text-purple-400 font-normal">•</span> AI CASE FILE
+              </p>
+              <span className="block text-[10px] text-slate-400 mt-1">AI Prompt Orchestration &amp; Cyber Mystery</span>
+            </div>
           </div>
 
           {/* EVENT TELEMETRY STRIP (Date, Time, Venue) */}

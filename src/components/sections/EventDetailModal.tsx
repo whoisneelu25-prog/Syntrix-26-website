@@ -72,7 +72,14 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
         >
           {/* TOP TERMINAL HEADER */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-cyan-500/20 bg-space-900/90">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center flex-wrap gap-2">
+              <span className={`px-2.5 py-1 rounded font-mono text-[10px] tracking-wider uppercase font-bold border ${
+                event.phase === 'Phase 1'
+                  ? 'bg-cyan-950/90 border-cyan-400/60 text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.2)]'
+                  : 'bg-purple-950/90 border-purple-400/60 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.2)]'
+              }`}>
+                {event.phase}
+              </span>
               <span className={`px-2.5 py-1 rounded font-mono text-[10px] tracking-wider uppercase font-bold border ${
                 event.category === 'Non-Technical'
                   ? 'bg-rose-950/80 border-rose-500/40 text-rose-300'
@@ -80,7 +87,7 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
               }`}>
                 {event.category} MISSION
               </span>
-              <span className="font-mono text-xs text-slate-400">
+              <span className="font-mono text-xs text-slate-400 hidden sm:inline">
                 // DOSSIER ID: {event.id.toUpperCase()}
               </span>
             </div>
@@ -90,7 +97,7 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
                 soundEngine.playBlip(500);
                 onClose();
               }}
-              className="p-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:border-cyan-400 hover:bg-space-850 transition-colors"
+              className="p-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:border-cyan-400 hover:bg-space-850 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -103,6 +110,9 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
             {/* HERO TITLE & CREWMATE BADGE */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
               <div className="space-y-1">
+                <div className="inline-block font-mono text-[11px] text-cyan-400 font-bold uppercase tracking-widest">
+                  {event.phaseTrack || `${event.phase} TRACK`}
+                </div>
                 <h3 className="font-orbitron text-2xl sm:text-4xl font-black text-white text-glow-cyan">
                   {event.name}
                 </h3>
@@ -127,7 +137,15 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
             </div>
 
             {/* TELEMETRY SPECS GRID */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 font-mono text-xs">
+              <div className="p-3 rounded-xl bg-space-900/80 border border-cyan-500/30">
+                <div className="flex items-center gap-1.5 text-cyan-400 mb-1">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="text-[10px] text-slate-400 uppercase font-semibold">STAGE</span>
+                </div>
+                <span className="font-bold text-white text-sm">{event.phase}</span>
+              </div>
+
               <div className="p-3 rounded-xl bg-space-900/80 border border-cyan-500/30">
                 <div className="flex items-center gap-1.5 text-cyan-400 mb-1">
                   <Users className="w-3.5 h-3.5" />
@@ -152,7 +170,7 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
                 <span className="font-bold text-white text-sm">{event.round || 'Single Round'}</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-space-900/80 border border-pink-500/30">
+              <div className="p-3 rounded-xl bg-space-900/80 border border-pink-500/30 col-span-2 sm:col-span-1">
                 <div className="flex items-center gap-1.5 text-pink-400 mb-1">
                   <MapPin className="w-3.5 h-3.5" />
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">VENUE</span>
@@ -254,7 +272,7 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
           {/* MODAL FOOTER */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 px-6 py-4 bg-space-900/90 border-t border-cyan-500/20">
             <span className="font-mono text-xs text-slate-400">
-              PRATHYUSHA ENGINEERING COLLEGE • SYNTRIX'26
+              DEPT OF ARTIFICIAL INTELLIGENCE &amp; DATA SCIENCE • PRATHYUSHA ENGINEERING COLLEGE
             </span>
 
             <div className="flex items-center gap-3 w-full sm:w-auto">

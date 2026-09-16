@@ -83,9 +83,16 @@ export const RulesSection: React.FC = () => {
                       {getEventIcon(event.iconName)}
                     </div>
                     <div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center flex-wrap gap-2">
                         <span className="font-orbitron text-base sm:text-lg font-black text-white">
                           {event.name}
+                        </span>
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border ${
+                          event.phase === 'Phase 1'
+                            ? 'bg-cyan-950/80 border-cyan-400/50 text-cyan-300'
+                            : 'bg-purple-950/80 border-purple-400/50 text-purple-300'
+                        }`}>
+                          {event.phase}
                         </span>
                         <span className={`px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold border ${
                           event.category === 'Non-Technical'
