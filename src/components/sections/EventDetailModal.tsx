@@ -175,7 +175,7 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
                   <MapPin className="w-3.5 h-3.5" />
                   <span className="text-[10px] text-slate-400 uppercase font-semibold">VENUE</span>
                 </div>
-                <span className="font-bold text-white text-sm">{event.venue || 'AI&DS Block'}</span>
+                <span className="font-bold text-white text-sm">{event.venue || 'AI&DS Block (Report to Seminar Hall)'}</span>
               </div>
             </div>
 
@@ -214,7 +214,7 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
                 {event.examplePrompts && (
                   <div className="space-y-2 pt-1">
                     <span className="font-mono text-[11px] text-cyan-300 font-bold uppercase tracking-wider block">
-                      EXAMPLE RANDOM TOPIC CARDS:
+                      SAMPLE STARTUP INSPIRATION THEMES:
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {event.examplePrompts.map((prompt, idx) => (

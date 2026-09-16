@@ -39,7 +39,7 @@ export const MissionBriefing: React.FC = () => {
             className="p-4 rounded-xl bg-space-900/90 border border-cyan-500/40 backdrop-blur-md shadow-[0_0_15px_rgba(0,240,255,0.15)] flex flex-col items-center text-center"
           >
             <MapPin className="w-4 h-4 text-cyan-400 mb-1" />
-            <span className="font-mono text-[9px] text-slate-400 tracking-wider uppercase">LOCATION</span>
+            <span className="font-mono text-[9px] text-slate-400 tracking-wider uppercase">REPORTING &amp; VENUE</span>
             <span className="font-orbitron font-extrabold text-xs sm:text-sm text-white">{eventConfig.venue}</span>
           </motion.div>
 
@@ -201,7 +201,7 @@ export const MissionBriefing: React.FC = () => {
               </div>
 
               <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-slate-400 relative z-10">
-                <span>{eventConfig.venue} HQ</span>
+                <span>Report to Seminar Hall • Events in AI&amp;DS Block</span>
                 <span className="text-cyan-400 font-bold">18-09-2026</span>
               </div>
             </div>

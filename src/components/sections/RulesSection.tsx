@@ -191,7 +191,7 @@ export const RulesSection: React.FC = () => {
                           </div>
                           <div>
                             <span className="text-slate-500 uppercase block text-[10px]">VENUE</span>
-                            <span className="text-white font-bold">{event.venue || 'AI&DS Block'}</span>
+                            <span className="text-white font-bold">{event.venue || 'AI&DS Block (Report to Seminar Hall)'}</span>
                           </div>
                         </div>
 

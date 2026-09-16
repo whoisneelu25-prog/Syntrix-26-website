@@ -89,7 +89,7 @@ export const EventGrid: React.FC<EventGridProps> = ({
                 PAPER 404 &bull; CRAZY PITCH
               </h3>
               <p className="font-mono text-xs text-cyan-300/80 mt-1">
-                Technical Paper Presentation &amp; On-the-Spot Startup Pitch
+                Technical Paper Presentation &amp; Startup Pitch Challenge
               </p>
             </button>
 

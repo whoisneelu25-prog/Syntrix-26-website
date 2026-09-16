@@ -73,7 +73,7 @@ export const CountdownSection: React.FC = () => {
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-slate-400 tracking-wider">
-            TARGET: 18 SEPTEMBER 2026 • 09:00 AM IST • PRATHYUSHA AI&DS BLOCK
+            TARGET: 18 SEPTEMBER 2026 • 09:00 AM IST • REPORT TO SEMINAR HALL • EVENTS IN AI&amp;DS BLOCK
           </p>
         </div>
 
@@ -111,7 +111,7 @@ export const CountdownSection: React.FC = () => {
               ALL SYSTEMS ONLINE // MISSION ACTIVE
             </h3>
             <p className="font-space text-slate-300 max-w-md">
-              SYNTRIX'26 is currently underway at AI&DS Block. All registered crewmates report to your respective mission tracks.
+              SYNTRIX'26 is currently underway! Report to Seminar Hall — all events take place in the AI&amp;DS Block.
             </p>
           </div>
         )}

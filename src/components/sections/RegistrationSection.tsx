@@ -42,7 +42,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
     { num: 'STEP 1', title: 'SELECT YOUR MISSION', desc: 'Choose AI Case File, Prompt Craft, Paper 404, or Crazy Pitch.' },
     { num: 'STEP 2', title: 'READ THE RULES', desc: 'Verify team capacity (duo/trio) and operational directives.' },
     { num: 'STEP 3', title: 'OPEN GOOGLE FORM', desc: 'Submit your crewmate credentials via the official portal.' },
-    { num: 'STEP 4', title: 'REPORT TO AI&DS BLOCK', desc: 'Arrive at Prathyusha on Friday, 18-09-2026 at 9:00 AM.' },
+    { num: 'STEP 4', title: 'REPORT TO SEMINAR HALL', desc: 'Arrive and report to Seminar Hall on Friday, 18-09-2026 at 9:00 AM. Events will take place in AI&DS Block.' },
   ];
 
   return (
@@ -133,7 +133,7 @@ export const RegistrationSection: React.FC<RegistrationSectionProps> = ({
                 &ldquo;Assemble your crew. Complete the mission form to lock your slot.&rdquo;
               </span>
               <span className="font-mono text-xs text-slate-400">
-                18 September 2026 • 9:00 AM • AI&DS Block • Prathyusha Engineering College
+                18 September 2026 • 9:00 AM • Report to Seminar Hall • Events in AI&DS Block • Prathyusha Engineering College
               </span>
             </div>
           </div>

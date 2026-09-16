@@ -12,7 +12,6 @@ import { IntroSequence } from './components/intro/IntroSequence';
 
 // Layout & Sections
 import { Navbar } from './components/layout/Navbar';
-import { AnnouncementBanner } from './components/sections/AnnouncementBanner';
 import { HeroSection } from './components/sections/HeroSection';
 import { MissionBriefing } from './components/sections/MissionBriefing';
 import { EventGrid } from './components/sections/EventGrid';
@@ -109,10 +108,7 @@ export function App() {
         onOpenEmergencyModal={() => setIsEmergencyModalOpen(true)}
       />
 
-      {/* 5. CONFIGURABLE ANNOUNCEMENT BANNER */}
-      <AnnouncementBanner />
-
-      {/* 6. MAIN LOBBY CONTENT SECTIONS */}
+      {/* 5. MAIN LOBBY CONTENT SECTIONS */}
       <main className="relative z-10 space-y-4">
         {/* LOBBY // HERO */}
         <HeroSection

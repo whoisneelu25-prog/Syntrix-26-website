@@ -213,8 +213,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <MapPin className="w-4 h-4" />
               </div>
               <div className="text-left">
-                <span className="block text-[10px] text-slate-400 uppercase font-semibold">VENUE</span>
-                <span className="font-bold text-white text-xs sm:text-sm">{eventConfig.venue}</span>
+                <span className="block text-[10px] text-slate-400 uppercase font-semibold">VENUE &amp; REPORTING</span>
+                <span className="font-bold text-white text-xs sm:text-sm block">{eventConfig.venue}</span>
                 <span className="block text-[10px] text-rose-400 font-semibold">PEC CAMPUS</span>
               </div>
             </div>

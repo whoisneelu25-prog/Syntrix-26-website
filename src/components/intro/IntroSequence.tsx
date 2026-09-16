@@ -526,8 +526,8 @@ export const IntroSequence: React.FC<IntroSequenceProps> = ({ onComplete }) => {
                 <span className="font-bold text-white tracking-wider">09:00 AM</span>
               </div>
               <div>
-                <span className="block text-[10px] text-cyan-400 uppercase tracking-widest font-mono">VENUE</span>
-                <span className="font-bold text-white tracking-wider">AI&DS BLOCK</span>
+                <span className="block text-[10px] text-cyan-400 uppercase tracking-widest font-mono">REPORTING &amp; VENUE</span>
+                <span className="font-bold text-white tracking-wider text-[9px] sm:text-[10px] leading-tight block">REPORT: SEMINAR HALL<br /><span className="text-cyan-300 font-semibold text-[8px] sm:text-[9px]">EVENTS: AI&amp;DS BLOCK</span></span>
               </div>
             </motion.div>
 

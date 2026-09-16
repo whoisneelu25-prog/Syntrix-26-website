@@ -108,7 +108,7 @@ export const EmergencyMeetingModal: React.FC<EmergencyMeetingModalProps> = ({ is
               &ldquo;WHO TOUCHED THE MISSION FILE?&rdquo;
             </span>
             <span className="font-mono text-xs text-slate-300">
-              Dropship Telemetry Logged • AI&DS Block • 18-09-2026
+              Dropship Telemetry Logged • Report to Seminar Hall • Events in AI&amp;DS Block • 18-09-2026
             </span>
           </div>
 
